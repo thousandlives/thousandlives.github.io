@@ -2,17 +2,19 @@
 <title>The Title</title>
 <body>
   This is some text for the page!<br>
-  <button type="button" onClick="ClickCounter()">Click Me!</button> 
+  <button type="button" onClick="console.log(ClickCounter())">Click Me!</button> 
   
   <script>
-    function ClickCounter() }
-      return 1;
+    var clickCount = 0
+    function ClickCounter() {
+      clickCount++;
+      return clickCount;
     }
   </script>
   
   
   
-  <br><br>Update timestamp: 12:41 23/02/2020
+  <br><br>Update timestamp: 12:45 23/02/2020
   
 </body>
 </html>
