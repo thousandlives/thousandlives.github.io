@@ -1,17 +1,23 @@
 <html>
 <title>The Title</title>
-<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+  var clickCount = 0
+  function ClickCounter() {
+    clickCount++;
+    return clickCount;
+  }
+  $(document).ready(function(){
+    $("clickButton").click(function(){
+      $(this).hide()
+    });
+  });
+</script>
+ <body>
   This is some text for the page!<br>
-  <button type="button" onClick="window.alert(ClickCounter())">Click Me!</button> 
+  <button id="clickButton" type="button" onClick="window.alert(ClickCounter())">Click Me!</button> 
   
-  <script>
-    var clickCount = 0
-    function ClickCounter() {
-      clickCount++;
-      return clickCount;
-    }
-  </script>
-  
+ 
   
   
   <br><br>Update timestamp: 13:01 23/02/2020
