@@ -3,24 +3,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
   var clickCount = 0
-  function ClickCounter() {
-    clickCount++;
-    return clickCount;
-  }
+
   $(document).ready(function(){
+
     $("#clickButton").click(function(){
-      $("#clickButton").hide();
+      clickCount++
+      $("VisCount").html(count);
+      
     });
   });
 </script>
  <body>
   This is some text for the page!<br>
-  <button id="clickButton" type="button">Click Me!</button> 
+   <button id="clickButton" type="button">Click Me!</button> <div id="VisCount"></div>
   
  
   
   
-  <br><br>Update timestamp: 16:38 23/02/2020
+  <br><br>Update timestamp: 07:39 29/02/2020
   
 </body>
 </html>
