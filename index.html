@@ -2,91 +2,160 @@
 <title>The ATLAS Project</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-  var StrCount = 0;
-  var AgiCount = 0;
-  var ConCount = 0;
-  var IntCount = 0;
-  var WisCount = 0;
-  var PieCount = 0;
-  var WarCount = 0;
-  var MagCount = 0;
-  var RogCount = 0;
-  var ClrCount = 0;
-  var BrbCount = 0;
-  var WckCount = 0;
-  var PalCount = 0;
-  var RgrCount = 0;
-  var MnkCount = 0;
-  var BrdCount = 0;
+
+  if (localStorage.StrCount) {
+    localStorage.StrCount = Number(localStorage.StrCount)
+  } else {
+	localStorage.StrCount = 0
+  }
+  if (localStorage.AgiCount) {
+    localStorage.AgiCount = Number(localStorage.AgiCount)
+  } else {
+	localStorage.AgiCount = 0
+  }
+  if (localStorage.ConCount) {
+    localStorage.ConCount = Number(localStorage.ConCount)
+  } else {
+	localStorage.ConCount = 0
+  }
+  if (localStorage.IntCount) {
+    localStorage.IntCount = Number(localStorage.IntCount)
+  } else {
+	localStorage.IntCount = 0
+  }
+  if (localStorage.WisCount) {
+    localStorage.WisCount = Number(localStorage.WisCount)
+  } else {
+	localStorage.WisCount = 0
+  }
+  if (localStorage.PieCount) {
+    localStorage.PieCount = Number(localStorage.PieCount)
+  } else {
+	localStorage.PieCount = 0
+  }
+
+  if (localStorage.WarCount) {
+    localStorage.WarCount = Number(localStorage.WarCount)
+  } else {
+	localStorage.WarCount = 0
+  }
+  if (localStorage.MagCount) {
+    localStorage.MagCount = Number(localStorage.MagCount)
+  } else {
+	localStorage.MagCount = 0
+  }
+  if (localStorage.RogCount) {
+    localStorage.RogCount = Number(localStorage.RogCount)
+  } else {
+	localStorage.RogCount = 0
+  }
+  if (localStorage.ClrCount) {
+    localStorage.ClrCount = Number(localStorage.ClrCount)
+  } else {
+	localStorage.ClrCount = 0
+  }
+  if (localStorage.BrbCount) {
+    localStorage.BrbCount = Number(localStorage.BrbCount)
+  } else {
+	localStorage.BrbCount = 0
+  }
+  if (localStorage.WckCount) {
+    localStorage.WckCount = Number(localStorage.WckCount)
+  } else {
+	localStorage.WckCount = 0
+  }
+  if (localStorage.PalCount) {
+    localStorage.PalCount = Number(localStorage.PalCount)
+  } else {
+	localStorage.PalCount = 0
+  }
+  if (localStorage.RgrCount) {
+    localStorage.RgrCount = Number(localStorage.RgrCount)
+  } else {
+	localStorage.RgrCount = 0
+  }
+  if (localStorage.MnkCount) {
+    localStorage.MnkCount = Number(localStorage.MnkCount)
+  } else {
+	localStorage.MnkCount = 0
+  }
+  if (localStorage.BrdCount) {
+    localStorage.BrdCount = Number(localStorage.BrdCount)
+  } else {
+	localStorage.BrdCount = 0
+  }
 
 
   $(document).ready(function(){
 
     $("#StrButton").click(function(){
-      StrCount++
-      $("div.StrCountDiv").html(StrCount);
+      localStorage.StrCount++
+      localStorage.setItem("SavedStr",localStorage.StrCount);
+      $("div.StrCountDiv").html(localStorage.StrCount);
     });
     $("#AgiButton").click(function(){
-      AgiCount++
-      $("div.AgiCountDiv").html(AgiCount);
+      localStorage.AgiCount++
+      $("div.AgiCountDiv").html(localStorage.AgiCount);
     });
     $("#ConButton").click(function(){
-      ConCount++
-      $("div.ConCountDiv").html(ConCount);
+      localStorage.ConCount++
+      $("div.ConCountDiv").html(localStorage.ConCount);
     });
     $("#IntButton").click(function(){
-      IntCount++
-      $("div.IntCountDiv").html(IntCount);
+      localStorage.IntCount++
+      $("div.IntCountDiv").html(localStorage.IntCount);
     });
     $("#WisButton").click(function(){
-      WisCount++
-      $("div.WisCountDiv").html(WisCount);
+      localStorage.WisCount++
+      $("div.WisCountDiv").html(localStorage.WisCount);
     });
     $("#PieButton").click(function(){
-      PieCount++
-      $("div.PieCountDiv").html(PieCount);
+      localStorage.PieCount++
+      $("div.PieCountDiv").html(localStorage.PieCount);
     });
     $("#WarButton").click(function(){
-      WarCount++
-      $("div.WarCountDiv").html(WarCount);
+      localStorage.WarCount++
+      $("div.WarCountDiv").html(localStorage.WarCount);
     });
     $("#MagButton").click(function(){
-      MagCount++
-      $("div.MagCountDiv").html(MagCount);
+      localStorage.MagCount++
+      $("div.MagCountDiv").html(localStorage.MagCount);
     });
     $("#RogButton").click(function(){
-      RogCount++
-      $("div.RogCountDiv").html(RogCount);
+      localStorage.RogCount++
+      $("div.RogCountDiv").html(localStorage.RogCount);
     });
     $("#ClrButton").click(function(){
-      ClrCount++
-      $("div.ClrCountDiv").html(ClrCount);
+      localStorage.ClrCount++
+      $("div.ClrCountDiv").html(localStorage.ClrCount);
     });
     $("#BrbButton").click(function(){
-      BrbCount++
-      $("div.BrbCountDiv").html(BrbCount);
+      localStorage.BrbCount++
+      $("div.BrbCountDiv").html(localStorage.BrbCount);
     });
     $("#WckButton").click(function(){
-      WckCount++
-      $("div.WckCountDiv").html(WckCount);
+      localStorage.WckCount++
+      $("div.WckCountDiv").html(localStorage.WckCount);
     });
     $("#PalButton").click(function(){
-      PalCount++
-      $("div.PalCountDiv").html(PalCount);
+      localStorage.PalCount++
+      $("div.PalCountDiv").html(localStorage.PalCount);
     });
     $("#RgrButton").click(function(){
-      RgrCount++
-      $("div.RgrCountDiv").html(RgrCount);
+      localStorage.RgrCount++
+      $("div.RgrCountDiv").html(localStorage.RgrCount);
     });
     $("#MnkButton").click(function(){
-      MnkCount++
-      $("div.MnkCountDiv").html(MnkCount);
+      localStorage.MnkCount++
+      $("div.MnkCountDiv").html(localStorage.MnkCount);
     });
     $("#BrdButton").click(function(){
-      BrdCount++
-      $("div.BrdCountDiv").html(BrdCount);
+      localStorage.BrdCount++
+      $("div.BrdCountDiv").html(localStorage.BrdCount);
     });
   });
+  
+  
 </script>
 <body>
   Welcome to the <b>ATLAS Project</b><br><br>
@@ -113,7 +182,7 @@
   
   
   
-  <br><br><br><br><br>Update timestamp: 11:15 29/02/2020
+  <br><br><br><br><br>Update timestamp: 14:07 01/03/2020
   
 </body>
 </html>
