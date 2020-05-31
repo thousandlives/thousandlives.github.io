@@ -18,11 +18,6 @@
   } else {
 	localStorage.ConCount = 0
   }
-  if (localStorage.IntCount) {
-    localStorage.IntCount = Number(localStorage.IntCount)
-  } else {
-	localStorage.IntCount = 0
-  }
   if (localStorage.WisCount) {
     localStorage.WisCount = Number(localStorage.WisCount)
   } else {
@@ -51,8 +46,6 @@
       $("div.ConCountDiv").html(localStorage.ConCount);
     });
     $("#IntButton").click(function(){
-      localStorage.IntCount++
-      $("div.IntCountDiv").html(localStorage.IntCount);
     });
     $("#WisButton").click(function(){
       localStorage.WisCount++
@@ -72,12 +65,12 @@
   <button id="StrButton" type="button">Strength</button> <div class="StrCountDiv"></div><br>
   <button id="AgiButton" type="button">Agility</button> <div class="AgiCountDiv"></div><br>
   <button id="ConButton" type="button">Constitution</button> <div class="ConCountDiv"></div><br>
-  <button id="IntButton" type="button">Intelligence</button> <div class="IntCountDiv"></div><br>
+  <a href="intellect.html"><button>Intellect</button></a>
   <button id="WisButton" type="button">Wisdom</button> <div class="WisCountDiv"></div><br>
   <button id="PieButton" type="button">Piety</button> <div class="PieCountDiv"></div><br>
   <br>
   
-
+  
   
   
   
