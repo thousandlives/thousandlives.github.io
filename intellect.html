@@ -3,7 +3,47 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 
+  if (localStorage.PlayYesCount) {
+    localStorage.PlayYesCount = Number(localStorage.PlayYesCount)
+  } else {
+	localStorage.PlayYesCount = 0
+  }  
+  if (localStorage.PlayNoCount) {
+    localStorage.PlayNoCount = Number(localStorage.PlayNoCount)
+  } else {
+	localStorage.PlayNoCount = 0
+  }  
+  if (localStorage.DevYesCount) {
+    localStorage.DevYesCount = Number(localStorage.DevYesCount)
+  } else {
+	localStorage.DevYesCount = 0
+  }  
+  if (localStorage.DevNoCount) {
+    localStorage.DevNoCount = Number(localStorage.DevNoCount)
+  } else {
+	localStorage.DevNoCount = 0
+  }  
   
+  $(document).ready(function(){
+
+    $("#PlayYes").click(function(){
+      localStorage.PlayYesCount++
+      $("div.PlayYesDiv").html(localStorage.PlayYesCount);
+    });
+    $("#PlayNo").click(function(){
+      localStorage.PlayNoCount++
+      $("div.PlayNoDiv").html(localStorage.PlayNoCount);
+    });
+    $("#DevYes").click(function(){
+      localStorage.DevYesCount++
+      $("div.DevYesDiv").html(localStorage.DevYesCount);
+    });
+    $("#DevNo").click(function(){
+      localStorage.DevNoCount++
+      $("div.DevNoDiv").html(localStorage.DevNoCount);
+    });
+
+  });
   
 </script>
 <body>
@@ -22,7 +62,7 @@
   
   
   
-  <br><br><br><br><br>Update timestamp: 22:57 27/05/2020
+  <br><br><br><br><br>Update timestamp: 00:07 02/06/2020
   
 </body>
 </html>
