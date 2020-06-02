@@ -42,7 +42,13 @@
       localStorage.DevNoCount++
       $("div.DevNoDiv").html(localStorage.DevNoCount);
     });
-
+    
+    PlayRate = (localStorage.PlayYesCount) / (localStorage.PlayYesCount + localStorage.PlayNoCount)
+    DevRate = (localStorage.DevYesCount) / (localStorage.DevYesCount + localStorage.DevNoCount)
+	  
+    $("div.PlayRateDiv").html(PlayRate);
+    $("div.DevRateDiv").html(DevRate);
+	  
   });
   
 </script>
@@ -50,19 +56,21 @@
   <b>Intellect</b><br><br>
   <i>Part 1</i>: Play the Game <br>
   You must play one day's worth of ATLAS Project to succeed. Have you played the ATLAS Project today? <br>
-  <button id="PlayYes" type="button">Yes</button> <div class="PlayYesDiv"></div>     <button id="PlayNo" type="button">No</button> <div class="PlayNoDiv"></div><br>
-  I don't know how many times you've won or lost, because I don't know what PlayYesDiv or PlayNoDiv are. I also don't know if you've played today. Oh well. <br><br>
+  <button id="PlayYes" type="button">Yes</button>   <button id="PlayNo" type="button">No</button> <div class="PlayNoDiv"></div><br>
+  You have played the game <div class="PlayYesDiv"></div> times, and failed to play the game <div class="PlayNoDiv"></div> times.<br>
+  That works out to a rate of <div class="PlayRateDiv"></div>. Make of that what you will.<br><br>
   <i>Part 2</i>: Develop the Game <br>
   You must develop, update or improve the game in some minor way (at least) every day. Have you developed the ATLAS Project today? <br>
   <button id="DevYes" type="button">Yes</button> <div class="DevYesDiv"></div> <button id="DevNo" type="button">No</button> <div class="DevNoDiv"></div><br>
-  I don't know how many times you've won or lost, because I don't know what DevYesDiv or DevNoDiv are. I also don't know if you've developed anything today. Oh well. <br><br>
+  You have worked on the game <div class="DevYesDiv"></div> times, and failed to work on the game <div class="DevNoDiv"></div> times.<br>
+  That works out to a rate of <div class="DevRateDiv"></div>. Make of that what you will.<br><br>
   <br>
   
   
   
   
   
-  <br><br><br><br><br>Update timestamp: 00:07 02/06/2020
+  <br><br><br><br><br>Update timestamp: 12:47 02/06/2020
   
 </body>
 </html>
