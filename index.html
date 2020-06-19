@@ -29,14 +29,15 @@
 	localStorage.PieCount = 0
   }
 
-  $("div.PieCountDiv").html(localStorage.StrCount);
-  $("div.PieCountDiv").html(localStorage.AgiCount);
-  $("div.PieCountDiv").html(localStorage.ConCount);
-  $("div.PieCountDiv").html(localStorage.WisCount);
-  $("div.PieCountDiv").html(localStorage.PieCount);
 	
   $(document).ready(function(){
 
+    $("div.PieCountDiv").html(localStorage.StrCount);
+    $("div.PieCountDiv").html(localStorage.AgiCount);
+    $("div.PieCountDiv").html(localStorage.ConCount);
+    $("div.PieCountDiv").html(localStorage.WisCount);
+    $("div.PieCountDiv").html(localStorage.PieCount);
+	  
     $("#StrButton").click(function(){
       localStorage.StrCount++
       localStorage.setItem("SavedStr",localStorage.StrCount);
@@ -79,7 +80,7 @@
   
   
   
-  <br><br><br><br><br>Update timestamp: 15:19 19/06/2020
+  <br><br><br><br><br>Update timestamp: 15:22 19/06/2020
   
 </body>
 </html>
