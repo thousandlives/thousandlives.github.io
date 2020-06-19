@@ -43,8 +43,8 @@
       $("div.DevNoDiv").html(localStorage.DevNoCount);
     });
     
-    PlayRate = (localStorage.PlayYesCount) / (localStorage.PlayYesCount + localStorage.PlayNoCount)
-    DevRate = (localStorage.DevYesCount) / (localStorage.DevYesCount + localStorage.DevNoCount)
+    PlayRate = ((localStorage.PlayYesCount) / (localStorage.PlayYesCount + localStorage.PlayNoCount)).toFixed(2);
+    DevRate = ((localStorage.DevYesCount) / (localStorage.DevYesCount + localStorage.DevNoCount)).toFixed(2);
 	  
     $("div.PlayRateDiv").html(PlayRate);
     $("div.DevRateDiv").html(DevRate);
@@ -74,7 +74,7 @@
   
   
   
-  <br><br><br><br><br>Update timestamp: 13:07 02/06/2020
+  <br><br><br><br><br>Update timestamp: 15:10 19/06/2020
   
 </body>
 </html>
