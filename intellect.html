@@ -46,13 +46,12 @@
 
 		PlayRate = ((localStorage.PlayYesCount) / (localStorage.PlayYesCount + localStorage.PlayNoCount)).toFixed(2);
 		DevRate = ((localStorage.DevYesCount) / (localStorage.DevYesCount + localStorage.DevNoCount)).toFixed(2);
-		document.getElementbyId("PlayRate").innerHTML = PlayRate;
-		document.getElmeentbyID("DevRate").innerHTML = DevRate;
-
-		$("div.PlayYesDiv").html(localStorage.PlayYesCount);
-		$("div.PlayNoDiv").html(localStorage.PlayNoCount);
-		$("div.DevYesDiv").html(localStorage.DevYesCount);
-		$("div.DevNoDiv").html(localStorage.DevNoCount);
+		$("PlayRate").html(PlayRate);
+		$("DevRate").html(DevRate);
+		$("PlayYes").html(localStorage.PlayYesCount);
+		$("PlayNo").html(localStorage.PlayNoCount);
+		$("DevYes").html(localStorage.DevYesCount);
+		$("DevNo").html(localStorage.DevNoCount);
 	});
 </script>
 	
@@ -74,7 +73,7 @@
   
   
   
-  <br><br><br><br><br>Update timestamp: 15:45 19/06/2020
+  <br><br><br><br><br>Update timestamp: 02:49 21/06/2020
   
 </body>
 </html>
