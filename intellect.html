@@ -44,14 +44,12 @@
 			$("div.DevNoDiv").html(localStorage.DevNoCount);
 		});
 
-		PlayRate = ((localStorage.PlayYesCount) / (localStorage.PlayYesCount + localStorage.PlayNoCount)).toFixed(2);
-		DevRate = ((localStorage.DevYesCount) / (localStorage.DevYesCount + localStorage.DevNoCount)).toFixed(2);
+		PlayRate = (Number(localStorage.PlayYesCount) / (Number(localStorage.PlayYesCount) + Number(localStorage.PlayNoCount))).toFixed(2);
+		DevRate = (Number(localStorage.DevYesCount) / (Number(localStorage.DevYesCount) + Number(localStorage.DevNoCount))).toFixed(2);
 		$("#PlayRate").html(PlayRate);
 		$("#DevRate").html(DevRate);
 		$("#PlayYes").html(localStorage.PlayYesCount);
 		$("#PlayNo").html(localStorage.PlayNoCount);
-		PlaySum = localStorage.PlayYesCount + localStorage.PlayNoCount;
-		$("#PlaySum").html(PlaySum);
 		$("#DevYes").html(localStorage.DevYesCount);
 		$("#DevNo").html(localStorage.DevNoCount);
 	});
@@ -63,7 +61,6 @@
 	<b>JQUERY VARIABLE PRINT TEST</b><br>
 	<p id="PlayYes">Play Yes: </p><br>
 	<p id="PlayNo">Play No: </p><br>
-	<p id="PlaySum">Play Sum: </p><br>
 	<p id="PlayRate">Play Rate: </p><br>
 	<p id="DevYes">Dev Yes: </p><br>
 	<p id="DevNo">Dev No: </p><br>
@@ -85,7 +82,7 @@
 
 
 
-	<br><br><br><br><br>Update timestamp: 10:42 22/06/2020
+	<br><br><br><br><br>Update timestamp: 10:50 22/06/2020
 
 </body>
 </html>
