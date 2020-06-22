@@ -28,26 +28,26 @@
 
 	$(document).ready(function(){
 		$("#PlayYes").click(function(){
-		localStorage.PlayYesCount++
-		$("div.PlayYesDiv").html(localStorage.PlayYesCount);
+			localStorage.PlayYesCount++
+			$("div.PlayYesDiv").html(localStorage.PlayYesCount);
 		});
 		$("#PlayNo").click(function(){
-		localStorage.PlayNoCount++
-		$("div.PlayNoDiv").html(localStorage.PlayNoCount);
+			localStorage.PlayNoCount++
+			$("div.PlayNoDiv").html(localStorage.PlayNoCount);
 		});
 		$("#DevYes").click(function(){
-		localStorage.DevYesCount++
-		$("div.DevYesDiv").html(localStorage.DevYesCount);
+			localStorage.DevYesCount++
+			$("div.DevYesDiv").html(localStorage.DevYesCount);
 		});
 		$("#DevNo").click(function(){
-		localStorage.DevNoCount++
-		$("div.DevNoDiv").html(localStorage.DevNoCount);
+			localStorage.DevNoCount++
+			$("div.DevNoDiv").html(localStorage.DevNoCount);
 		});
 
 		PlayRate = ((localStorage.PlayYesCount) / (localStorage.PlayYesCount + localStorage.PlayNoCount)).toFixed(2);
 		DevRate = ((localStorage.DevYesCount) / (localStorage.DevYesCount + localStorage.DevNoCount)).toFixed(2);
-		$("PlayRate").html(PlayRate);
-		$("DevRate").html(DevRate);
+		$("#PlayRate").html(PlayRate);
+		$("#DevRate").html(DevRate);
 		$("PlayYes").html(localStorage.PlayYesCount);
 		$("PlayNo").html(localStorage.PlayNoCount);
 		$("DevYes").html(localStorage.DevYesCount);
@@ -58,6 +58,14 @@
 <body>
 	<b>Intellect</b>
 	<br><br>
+	<b>JQUERY VARIABLE PRINT TEST</b><br>
+	<p id="PlayYes">Play Yes: </p><br>
+	<p id="PlayNo">Play No: </p><br>
+	<p id="PlayRate">Play Rate: </p><br>
+	<p id="DevYes">Dev Yes: </p><br>
+	<p id="DevNo">Dev No: </p><br>
+	<p id="DevRate">Dev Rate: </p><br>
+	<br>
 	<i>Part 1</i>: Play the Game<br>
 	You must play one day's worth of ATLAS Project to succeed. Have you played the ATLAS Project today?<br>
 	<button id="PlayYes" type="button">Yes</button>   <button id="PlayNo" type="button">No</button>
@@ -74,7 +82,7 @@
 
 
 
-	<br><br><br><br><br>Update timestamp: 02:52 21/06/2020
+	<br><br><br><br><br>Update timestamp: 10:33 22/06/2020
 
 </body>
 </html>
