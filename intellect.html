@@ -2,56 +2,45 @@
 <title>The ATLAS Project</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-	if (localStorage.PlayYesCount) {
-	localStorage.PlayYesCount = Number(localStorage.PlayYesCount)
-	} else {
-	localStorage.PlayYesCount = 0
+	if (not localStorage.PlayYesCount) {
+		localStorage.PlayYesCount = 0;
+		localStorage.PlayNoCount = 0;
+		localStorage.DevYesCount = 0;
+		localStorage.DevNoCount = 0;
 	}
 	
-	if (localStorage.PlayNoCount) {
-	localStorage.PlayNoCount = Number(localStorage.PlayNoCount)
-	} else {
-	localStorage.PlayNoCount = 0
-	}
-	
-	if (localStorage.DevYesCount) {
-	localStorage.DevYesCount = Number(localStorage.DevYesCount)
-	} else {
-	localStorage.DevYesCount = 0
-	}
-	
-	if (localStorage.DevNoCount) {
-	localStorage.DevNoCount = Number(localStorage.DevNoCount)
-	} else {
-	localStorage.DevNoCount = 0
-	}
+	PlayYesCount = Number(localStorage.PlayYesCount);
+	PlayNoCount = Number(localStorage.PlayNoCount);
+	DevYesCount = Number(localStorage.DevYesCount);
+	DevNoCount = Number(localStorage.DevNoCount);
+	PlayRate = PlayYesCount/(PlayYesCount+PlayNoCount);
+	DevRate = DevYesCount/(DevYesCount+DevNoCount);
+
 
 	$(document).ready(function(){
 		$("#PlayYes").click(function(){
 			localStorage.PlayYesCount++
-			$("div.PlayYesDiv").html(localStorage.PlayYesCount);
+			PlayYesCount++
 		});
 		$("#PlayNo").click(function(){
 			localStorage.PlayNoCount++
-			$("div.PlayNoDiv").html(localStorage.PlayNoCount);
+			PlayNoCount++
 		});
 		$("#DevYes").click(function(){
 			localStorage.DevYesCount++
-			$("div.DevYesDiv").html(localStorage.DevYesCount);
+			DevYesCount++
 		});
 		$("#DevNo").click(function(){
 			localStorage.DevNoCount++
-			$("div.DevNoDiv").html(localStorage.DevNoCount);
+			DevNoCount++
 		});
 
-		PlayRate = (Number(localStorage.PlayYesCount) / (Number(localStorage.PlayYesCount) + Number(localStorage.PlayNoCount))).toFixed(2);
-		DevRate = (Number(localStorage.DevYesCount) / (Number(localStorage.DevYesCount) + Number(localStorage.DevNoCount))).toFixed(2);
 		$("#PlayRate").html(PlayRate);
 		$("#DevRate").html(DevRate);
-		$("#PlayYes").html(localStorage.PlayYesCount);
-		$("#PlayNo").html(localStorage.PlayNoCount);
-		$("#DevYes").html(localStorage.DevYesCount);
-		$("#DevNo").html(localStorage.DevNoCount);
+		$("#PlayYes").html(PlayYesCount);
+		$("#PlayNo").html(PlayNoCount);
+		$("#DevYes").html(DevYesCount);
+		$("#DevNo").html(DevNoCount);
 	});
 </script>
 	
@@ -82,7 +71,7 @@
 
 
 
-	<br><br><br><br><br>Update timestamp: 10:50 22/06/2020
+	<br><br><br><br><br>Update timestamp: 20:06 22/06/2020
 
 </body>
 </html>
