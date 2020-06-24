@@ -2,12 +2,18 @@
 <title>The ATLAS Project</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-	if (not localStorage.PlayYesCount) {
+	if (localStorage.PlayYesCount) {
+		localStorage.PlayYesCount = Number(localStorage.PlayYesCount);
+		localStorage.PlayNoCount = Number(localStorage.PlayNoCount);
+		localStorage.DevYesCount = Number(localStorage.DevYesCount);
+		localStorage.DevNoCount = Number(localStorage.DevNoCount);
+	} else {
 		localStorage.PlayYesCount = 0;
 		localStorage.PlayNoCount = 0;
 		localStorage.DevYesCount = 0;
 		localStorage.DevNoCount = 0;
 	}
+
 	
 	var PlayYesCount = localStorage.PlayYesCount;
 	var PlayNoCount = localStorage.PlayNoCount;
