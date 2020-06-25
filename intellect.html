@@ -19,8 +19,8 @@
 	var PlayNoCount = Number(localStorage.PlayNoCount);
 	var DevYesCount = Number(localStorage.DevYesCount);
 	var DevNoCount = Number(localStorage.DevNoCount);
-	var PlayRate = PlayYesCount/(PlayYesCount+PlayNoCount);
-	var DevRate = DevYesCount/(DevYesCount+DevNoCount);
+	var PlayRate = PlayYesCount/(PlayYesCount+PlayNoCount).ToFixed(2)*100;
+	var DevRate = DevYesCount/(DevYesCount+DevNoCount).ToFixed(2)*100;
 
 
 	$(document).ready(function(){
@@ -57,19 +57,19 @@
 	You must play one day's worth of ATLAS Project to succeed. Have you played the ATLAS Project today?<br>
 	<button id="PlayYes" type="button">Yes</button>   <button id="PlayNo" type="button">No</button>
 	You have played the game <span id="PlayYesCount">ERROR</span> times, and failed to play the game <span id="PlayNoCount">ERROR</span> times.<br>
-	That works out to a rate of <span id="PlayRate">ERROR</span>. Make of that what you will.<br><br>
+	That works out to a rate of <span id="PlayRate">ERROR</span>%. Make of that what you will.<br><br>
 	<i>Part 2</i>: Develop the Game <br>
 	You must develop, update or improve the game in some minor way (at least) every day. Have you developed the ATLAS Project today? <br>
 	<button id="DevYes" type="button">Yes</button> <button id="DevNo" type="button">No</button>
 	You have worked on the game <span class="DevYesCount"></span> times, and failed to work on the game <span class="DevNoCount"></span> times.<br>
-	That works out to a rate of <span class="DevRate"></span>. Make of that what you will.<br><br>
+	That works out to a rate of <span class="DevRate"></span>%. Make of that what you will.<br><br>
 	<br>
 
 
 
 
 
-	<br><br><br><br><br>Update timestamp: 14:23 25/06/2020
+	<br><br><br><br><br>Update timestamp: 14:39 25/06/2020
 
 </body>
 </html>
