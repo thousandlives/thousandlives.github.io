@@ -19,8 +19,8 @@
 	var PlayNoCount = Number(localStorage.PlayNoCount);
 	var DevYesCount = Number(localStorage.DevYesCount);
 	var DevNoCount = Number(localStorage.DevNoCount);
-	var PlayRate = PlayYesCount/(PlayYesCount+PlayNoCount).ToFixed(2);
-	var DevRate = DevYesCount/(DevYesCount+DevNoCount).ToFixed(2);
+	var PlayRate = PlayYesCount/(PlayYesCount+PlayNoCount);
+	var DevRate = DevYesCount/(DevYesCount+DevNoCount);
 
 
 	$(document).ready(function(){
