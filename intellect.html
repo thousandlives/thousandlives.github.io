@@ -22,6 +22,14 @@
 	var PlayRate = Number((PlayYesCount/(PlayYesCount+PlayNoCount)).toFixed(2))*100;
 	var DevRate = Number((DevYesCount/(DevYesCount+DevNoCount)).toFixed(2))*100;
 
+	function RefreshPage() {
+		$("#PlayRate").html(PlayRate);
+		$("#DevRate").html(DevRate);
+		$("#PlayYesCount").html(PlayYesCount);
+		$("#PlayNoCount").html(PlayNoCount);
+		$("#DevYesCount").html(DevYesCount);
+		$("#DevNoCount").html(DevNoCount);
+	};
 
 	$(document).ready(function(){
 		$("#PlayYes").click(function(){
@@ -45,16 +53,10 @@
 			RefreshPage();
 		});
 
+	RefreshPage();
+		
 	});
 	
-	function RefreshPage() {
-		$("#PlayRate").html(PlayRate);
-		$("#DevRate").html(DevRate);
-		$("#PlayYesCount").html(PlayYesCount);
-		$("#PlayNoCount").html(PlayNoCount);
-		$("#DevYesCount").html(DevYesCount);
-		$("#DevNoCount").html(DevNoCount);
-	};
 	
 </script>
 	
@@ -69,7 +71,7 @@
 	<i>Part 2</i>: Develop the Game <br>
 	You must develop, update or improve the game in some minor way (at least) every day. Have you developed the ATLAS Project today? <br>
 	<button id="DevYes" type="button">Yes</button> <button id="DevNo" type="button">No</button>
-	You have worked on the game <span id="DevYesCount">ERROR</span> times, and failed to work on the game <span id="DevNoCount"></span> times.<br>
+	You have worked on the game <span id="DevYesCount">ERROR</span> times, and failed to work on the game <span id="DevNoCount">ERROR</span> times.<br>
 	That works out to a rate of <span id="DevRate"></span>%. Make of that what you will.<br><br>
 	<br>
 
@@ -77,7 +79,7 @@
 
 
 
-	<br><br><br><br><br>Update timestamp: 15:46 25/06/2020
+	<br><br><br><br><br>Update timestamp: 17:13 25/06/2020
 
 </body>
 </html>
