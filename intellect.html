@@ -23,14 +23,26 @@
 	var DevRate = Number(DevYesCount/(DevYesCount+DevNoCount))*100;
 
 	function RefreshPage() {
-		$("#PlayRate").html(PlayRate.toFixed(2));
-		$("#DevRate").html(DevRate.toFixed(2));
+		$("#PlayRate").html(PlayRate.toFixed());
+		$("#DevRate").html(DevRate.toFixed());
 		$("#PlayYesCount").html(PlayYesCount);
 		$("#PlayNoCount").html(PlayNoCount);
 		$("#DevYesCount").html(DevYesCount);
 		$("#DevNoCount").html(DevNoCount);
 	};
 
+	function ResetAllProgress() {
+		localStorage.PlayYesCount = 0;
+		localStorage.PlayNoCount = 0;
+		localStorage.DevYesCount = 0;
+		localStorage.DevNoCount = 0;
+		PlayYesCount = Number(localStorage.PlayYesCount);
+		PlayNoCount = Number(localStorage.PlayNoCount);
+		DevYesCount = Number(localStorage.DevYesCount);
+		DevNoCount = Number(localStorage.DevNoCount);
+		RefreshPage();
+	P;
+	
 	$(document).ready(function(){
 		$("#PlayYes").click(function(){
 			localStorage.PlayYesCount++
@@ -52,6 +64,7 @@
 			DevNoCount++
 			RefreshPage();
 		});
+		$("#ResetAll").click(ResetAll());
 
 	RefreshPage();
 		
@@ -74,12 +87,11 @@
 	You have worked on the game <span id="DevYesCount">ERROR</span> times, and failed to work on the game <span id="DevNoCount">ERROR</span> times.<br>
 	That works out to a rate of <span id="DevRate"></span>%. Make of that what you will.<br><br>
 	<br>
-
-
-
-
-
-	<br><br><br><br><br>Update timestamp: 17:18 25/06/2020
+	<br>
+	<br>
+	<br>
+	<br><button id="ResetAll" type="button">Reset All Progress</button>
+	<br>Update timestamp: 17:23 25/06/2020
 
 </body>
 </html>
