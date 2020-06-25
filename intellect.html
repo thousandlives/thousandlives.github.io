@@ -19,16 +19,16 @@
 	var PlayNoCount = Number(localStorage.PlayNoCount);
 	var DevYesCount = Number(localStorage.DevYesCount);
 	var DevNoCount = Number(localStorage.DevNoCount);
-	var PlayRate = Number((PlayYesCount/(PlayYesCount+PlayNoCount)).toFixed(2))*100;
-	var DevRate = Number((DevYesCount/(DevYesCount+DevNoCount)).toFixed(2))*100;
+	var PlayRate = Number(PlayYesCount/(PlayYesCount+PlayNoCount))*100;
+	var DevRate = Number(DevYesCount/(DevYesCount+DevNoCount))*100;
 
 	function RefreshPage() {
 		$("#PlayRate").html(PlayRate);
 		$("#DevRate").html(DevRate);
 		$("#PlayYesCount").html(PlayYesCount);
 		$("#PlayNoCount").html(PlayNoCount);
-		$("#DevYesCount").html(DevYesCount);
-		$("#DevNoCount").html(DevNoCount);
+		$("#DevYesCount").html(DevYesCount.toFixed(2));
+		$("#DevNoCount").html(DevNoCount.toFixed(2));
 	};
 
 	$(document).ready(function(){
@@ -79,7 +79,7 @@
 
 
 
-	<br><br><br><br><br>Update timestamp: 17:13 25/06/2020
+	<br><br><br><br><br>Update timestamp: 17:16 25/06/2020
 
 </body>
 </html>
