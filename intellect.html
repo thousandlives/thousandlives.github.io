@@ -19,8 +19,8 @@
 	var PlayNoCount = Number(localStorage.PlayNoCount);
 	var DevYesCount = Number(localStorage.DevYesCount);
 	var DevNoCount = Number(localStorage.DevNoCount);
-	var PlayRate = (PlayYesCount/(PlayYesCount+PlayNoCount)).toFixed(2);
-	var DevRate = (DevYesCount/(DevYesCount+DevNoCount)).toFixed(2);
+	var PlayRate = Number((PlayYesCount/(PlayYesCount+PlayNoCount)).toFixed(2))*100;
+	var DevRate = Number((DevYesCount/(DevYesCount+DevNoCount)).toFixed(2))*100;
 
 
 	$(document).ready(function(){
@@ -69,7 +69,7 @@
 
 
 
-	<br><br><br><br><br>Update timestamp: 15:40 25/06/2020
+	<br><br><br><br><br>Update timestamp: 15:42 25/06/2020
 
 </body>
 </html>
