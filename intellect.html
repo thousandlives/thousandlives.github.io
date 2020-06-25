@@ -23,12 +23,12 @@
 	var DevRate = Number(DevYesCount/(DevYesCount+DevNoCount))*100;
 
 	function RefreshPage() {
-		$("#PlayRate").html(PlayRate);
-		$("#DevRate").html(DevRate);
+		$("#PlayRate").html(PlayRate.toFixed(2));
+		$("#DevRate").html(DevRate.toFixed(2));
 		$("#PlayYesCount").html(PlayYesCount);
 		$("#PlayNoCount").html(PlayNoCount);
-		$("#DevYesCount").html(DevYesCount.toFixed(2));
-		$("#DevNoCount").html(DevNoCount.toFixed(2));
+		$("#DevYesCount").html(DevYesCount);
+		$("#DevNoCount").html(DevNoCount);
 	};
 
 	$(document).ready(function(){
@@ -79,7 +79,7 @@
 
 
 
-	<br><br><br><br><br>Update timestamp: 17:16 25/06/2020
+	<br><br><br><br><br>Update timestamp: 17:18 25/06/2020
 
 </body>
 </html>
