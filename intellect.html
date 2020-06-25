@@ -27,27 +27,35 @@
 		$("#PlayYes").click(function(){
 			localStorage.PlayYesCount++
 			PlayYesCount++
+			RefreshPage();
 		});
 		$("#PlayNo").click(function(){
 			localStorage.PlayNoCount++
 			PlayNoCount++
+			RefreshPage();
 		});
 		$("#DevYes").click(function(){
 			localStorage.DevYesCount++
 			DevYesCount++
+			RefreshPage();
 		});
 		$("#DevNo").click(function(){
 			localStorage.DevNoCount++
 			DevNoCount++
+			RefreshPage();
 		});
 
+	});
+	
+	function RefreshPage() {
 		$("#PlayRate").html(PlayRate);
 		$("#DevRate").html(DevRate);
 		$("#PlayYesCount").html(PlayYesCount);
 		$("#PlayNoCount").html(PlayNoCount);
 		$("#DevYesCount").html(DevYesCount);
 		$("#DevNoCount").html(DevNoCount);
-	});
+	};
+	
 </script>
 	
 <body>
@@ -69,7 +77,7 @@
 
 
 
-	<br><br><br><br><br>Update timestamp: 15:42 25/06/2020
+	<br><br><br><br><br>Update timestamp: 15:46 25/06/2020
 
 </body>
 </html>
