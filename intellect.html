@@ -15,10 +15,10 @@
 	}
 
 	
-	var PlayYesCount = localStorage.PlayYesCount;
-	var PlayNoCount = localStorage.PlayNoCount;
-	var DevYesCount = localStorage.DevYesCount;
-	var DevNoCount = localStorage.DevNoCount;
+	var PlayYesCount = Number(localStorage.PlayYesCount);
+	var PlayNoCount = Number(localStorage.PlayNoCount);
+	var DevYesCount = Number(localStorage.DevYesCount);
+	var DevNoCount = Number(localStorage.DevNoCount);
 	var PlayRate = PlayYesCount/(PlayYesCount+PlayNoCount);
 	var DevRate = DevYesCount/(DevYesCount+DevNoCount);
 
@@ -77,7 +77,7 @@
 
 
 
-	<br><br><br><br><br>Update timestamp: 20:18 24/06/2020
+	<br><br><br><br><br>Update timestamp: 12:40 25/06/2020
 
 </body>
 </html>
