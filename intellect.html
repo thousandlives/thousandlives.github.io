@@ -20,8 +20,8 @@
 	var PlayNoCount = Number(localStorage.PlayNoCount);
 	var DevYesCount = Number(localStorage.DevYesCount);
 	var DevNoCount = Number(localStorage.DevNoCount);
-	var PlayRate = Number(PlayYesCount/(PlayYesCount+PlayNoCount))*100;
-	var DevRate = Number(DevYesCount/(DevYesCount+DevNoCount))*100;
+  	var PlayRate, DevRate;
+ 	 var date = new Date();
 
 	$(document).ready(function(){
 		$("#PlayYes").click(function(){
@@ -45,15 +45,20 @@
 			RefreshPage();
 		});
 		$("#ResetAll").click(ResetAllProgress);
+		RefreshPage();
 	});
 		
 	function RefreshPage() {
+  	PlayRate = Number(PlayYesCount/(PlayYesCount+PlayNoCount))*100;
+		DevRate = Number(DevYesCount/(DevYesCount+DevNoCount))*100;
+		
 		$("#PlayRate").html(PlayRate.toFixed());
 		$("#DevRate").html(DevRate.toFixed());
 		$("#PlayYesCount").html(PlayYesCount);
 		$("#PlayNoCount").html(PlayNoCount);
 		$("#DevYesCount").html(DevYesCount);
 		$("#DevNoCount").html(DevNoCount);
+		$("#InstantTime").html(date);
 	};
 
 	function ResetAllProgress() {
@@ -68,7 +73,6 @@
 		RefreshPage();
 	};
 	
-	RefreshPage();
 	
 </script>
 	
@@ -85,14 +89,14 @@
 	You must develop, update or improve the game in some minor way (at least) every day. Have you developed the ATLAS Project today? <br>
 	<button id="DevYes" type="button">Yes</button> <button id="DevNo" type="button">No</button>
 	You have worked on the game <span id="DevYesCount">ERROR</span> times, and failed to work on the game <span id="DevNoCount">ERROR</span> times.<br>
-	That works out to a rate of <span id="DevRate"></span>%. Make of that what you will.<br><br>
+	That works out to a rate of <span id="DevRate">ERROR</span>%. Make of that what you will.<br><br>
 	<br>
 	<br>
 	<br>
 	<br>
 	<br>
 	<button id="ResetAll" type="button">Reset All Progress</button><br>
-	Update timestamp: 21:54 26/06/2020<br>
+	Update timestamp: 22:26 26/06/2020<br>
 	
 	I think that it is exactly <span id="InstantTime">ERROR</span> right now.
 
