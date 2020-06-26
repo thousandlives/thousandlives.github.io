@@ -23,8 +23,6 @@
 	var PlayRate = Number(PlayYesCount/(PlayYesCount+PlayNoCount))*100;
 	var DevRate = Number(DevYesCount/(DevYesCount+DevNoCount))*100;
 
-	RefreshPage();
-
 	$(document).ready(function(){
 		$("#PlayYes").click(function(){
 			localStorage.PlayYesCount++
@@ -70,6 +68,7 @@
 		RefreshPage();
 	};
 	
+	RefreshPage();
 	
 </script>
 	
@@ -93,7 +92,7 @@
 	<br>
 	<br>
 	<button id="ResetAll" type="button">Reset All Progress</button><br>
-	Update timestamp: 21:48 26/06/2020<br>
+	Update timestamp: 21:54 26/06/2020<br>
 	
 	I think that it is exactly <span id="InstantTime">ERROR</span> right now.
 
