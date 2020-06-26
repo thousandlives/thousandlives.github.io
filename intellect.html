@@ -21,7 +21,8 @@
 	var DevYesCount = Number(localStorage.DevYesCount);
 	var DevNoCount = Number(localStorage.DevNoCount);
   	var PlayRate, DevRate;
- 	 var date = new Date();
+ 	var date = new Date();
+	var lastMod = document.lastModified;
 
 	$(document).ready(function(){
 		$("#PlayYes").click(function(){
@@ -96,6 +97,7 @@
 	<br>
 	<br>
 	<button id="ResetAll" type="button">Reset All Progress</button><br>
+	Last Modified: <span id="LastModified">ERROR</span><br>
 	
 
 </body>
