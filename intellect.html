@@ -2,18 +2,8 @@
 <title>The ATLAS Project</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-	if (localStorage.PlayYesCount) {
-		localStorage.PlayYesCount = Number(localStorage.PlayYesCount);
-		localStorage.PlayNoCount = Number(localStorage.PlayNoCount);
-		localStorage.DevYesCount = Number(localStorage.DevYesCount);
-		localStorage.DevNoCount = Number(localStorage.DevNoCount);
-	} else {
-		localStorage.PlayYesCount = 0;
-		localStorage.PlayNoCount = 0;
-		localStorage.DevYesCount = 0;
-		localStorage.DevNoCount = 0;
-	}
 
+	DefineStorage();
 	
 	var PlayYesCount = Number(localStorage.PlayYesCount);
 	var PlayNoCount = Number(localStorage.PlayNoCount);
@@ -21,28 +11,10 @@
 	var DevNoCount = Number(localStorage.DevNoCount);
 	var PlayRate = Number(PlayYesCount/(PlayYesCount+PlayNoCount))*100;
 	var DevRate = Number(DevYesCount/(DevYesCount+DevNoCount))*100;
+	var date = new Date();
 
-	function RefreshPage() {
-		$("#PlayRate").html(PlayRate.toFixed());
-		$("#DevRate").html(DevRate.toFixed());
-		$("#PlayYesCount").html(PlayYesCount);
-		$("#PlayNoCount").html(PlayNoCount);
-		$("#DevYesCount").html(DevYesCount);
-		$("#DevNoCount").html(DevNoCount);
-	};
+	RefreshPage();
 
-	function ResetAllProgress() {
-		localStorage.PlayYesCount = 0;
-		localStorage.PlayNoCount = 0;
-		localStorage.DevYesCount = 0;
-		localStorage.DevNoCount = 0;
-		PlayYesCount = Number(localStorage.PlayYesCount);
-		PlayNoCount = Number(localStorage.PlayNoCount);
-		DevYesCount = Number(localStorage.DevYesCount);
-		DevNoCount = Number(localStorage.DevNoCount);
-		RefreshPage();
-	};
-	
 	$(document).ready(function(){
 		$("#PlayYes").click(function(){
 			localStorage.PlayYesCount++
@@ -65,15 +37,51 @@
 			RefreshPage();
 		});
 		$("#ResetAll").click(ResetAllProgress);
-
-	RefreshPage();
-		
 	});
+	
+	function DefineStorage() {
+		if (localStorage.PlayYesCount) {
+			localStorage.PlayYesCount = Number(localStorage.PlayYesCount);
+			localStorage.PlayNoCount = Number(localStorage.PlayNoCount);
+			localStorage.DevYesCount = Number(localStorage.DevYesCount);
+			localStorage.DevNoCount = Number(localStorage.DevNoCount);
+		} else {
+			localStorage.PlayYesCount = 0;
+			localStorage.PlayNoCount = 0;
+			localStorage.DevYesCount = 0;
+			localStorage.DevNoCount = 0;
+		}
+	};
+	
+	function RefreshPage() {
+		$("#PlayRate").html(PlayRate.toFixed());
+		$("#DevRate").html(DevRate.toFixed());
+		$("#PlayYesCount").html(PlayYesCount);
+		$("#PlayNoCount").html(PlayNoCount);
+		$("#DevYesCount").html(DevYesCount);
+		$("#DevNoCount").html(DevNoCount);
+		$("#InstantTime").html(date);
+	};
+
+	function ResetAllProgress() {
+		localStorage.PlayYesCount = 0;
+		localStorage.PlayNoCount = 0;
+		localStorage.DevYesCount = 0;
+		localStorage.DevNoCount = 0;
+		PlayYesCount = Number(localStorage.PlayYesCount);
+		PlayNoCount = Number(localStorage.PlayNoCount);
+		DevYesCount = Number(localStorage.DevYesCount);
+		DevNoCount = Number(localStorage.DevNoCount);
+		RefreshPage();
+	};
+	
+
 	
 	
 </script>
 	
 <body>
+	<br>
 	<b>Intellect</b><br>
 	<br><br>
 	<i>Part 1</i>: Play the Game<br>
@@ -90,8 +98,11 @@
 	<br>
 	<br>
 	<br>
-	<br><button id="ResetAll" type="button">Reset All Progress</button>
-	<br>Update timestamp: 17:32 25/06/2020
+	<br>
+	<button id="ResetAll" type="button">Reset All Progress</button><br>
+	Update timestamp: 20:20 26/06/2020<br>
+	
+	I think that it is exactly <span id="InstantTime">ERROR</span> right now.
 
 </body>
 </html>
