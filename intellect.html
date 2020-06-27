@@ -14,35 +14,53 @@
 		localStorage.PlayNoCount = 0;
 		localStorage.DevYesCount = 0;
 		localStorage.DevNoCount = 0;
+		localStorage.lastPlay = "Never";
+		localStorage.lastDev = "Never";
 	}
 	
 	var PlayYesCount = Number(localStorage.PlayYesCount);
 	var PlayNoCount = Number(localStorage.PlayNoCount);
 	var DevYesCount = Number(localStorage.DevYesCount);
 	var DevNoCount = Number(localStorage.DevNoCount);
-  	var PlayRate, DevRate;
+  	var PlayRate = 0, DevRate = 0;
  	var date = new Date();
-	var lastMod = document.lastModified;
+	var dateString = "";
 
 	$(document).ready(function(){
 		$("#PlayYes").click(function(){
-			localStorage.PlayYesCount++
-			PlayYesCount++
+			if (CheckDate("play") == "approved") {
+				localStorage.PlayYesCount++
+				PlayYesCount++				
+			} else {
+				$("#PlayFail").html("You've already recorded today's play session.")
+			}
 			RefreshPage();
 		});
 		$("#PlayNo").click(function(){
-			localStorage.PlayNoCount++
-			PlayNoCount++
+			if (CheckDate("play") == "approved") {
+				localStorage.PlayNoCount++
+				PlayNoCount++				
+			} else {
+				$("#PlayFail").html("You've already recorded today's play session.")
+			}
 			RefreshPage();
 		});
 		$("#DevYes").click(function(){
-			localStorage.DevYesCount++
-			DevYesCount++
+			if (CheckDate("dev") == "approved") {
+				localStorage.DevYesCount++
+				DevYesCount++				
+			} else {
+				$("#DevFail").html("You've already recorded today's development session.")
+			}
 			RefreshPage();
 		});
 		$("#DevNo").click(function(){
-			localStorage.DevNoCount++
-			DevNoCount++
+			if (CheckDate("dev") == "approved") {
+				localStorage.DevNoCount++
+				DevNoCount++				
+			} else {
+				$("#DevFail").html("You've already recorded today's development session.")
+			}
 			RefreshPage();
 		});
 		$("#ResetAll").click(ResetAllProgress);
@@ -50,7 +68,7 @@
 	});
 		
 	function RefreshPage() {
-  	PlayRate = Number(PlayYesCount/(PlayYesCount+PlayNoCount))*100;
+  		PlayRate = Number(PlayYesCount/(PlayYesCount+PlayNoCount))*100;
 		DevRate = Number(DevYesCount/(DevYesCount+DevNoCount))*100;
 		
 		$("#PlayRate").html(PlayRate.toFixed());
@@ -59,7 +77,9 @@
 		$("#PlayNoCount").html(PlayNoCount);
 		$("#DevYesCount").html(DevYesCount);
 		$("#DevNoCount").html(DevNoCount);
-		$("#LastModified").html(lastMod);
+		$("#LastModified").html(document.lastModified);
+		$("#LastDev").html(localStorage.lastDev);
+		$("#LastPlay").html(localStorage.lastPlay);
 	};
 
 	function ResetAllProgress() {
@@ -67,6 +87,8 @@
 		localStorage.PlayNoCount = 0;
 		localStorage.DevYesCount = 0;
 		localStorage.DevNoCount = 0;
+		localStorage.lastPlay = "Never";
+		localStorage.lastDev = "Never";
 		PlayYesCount = Number(localStorage.PlayYesCount);
 		PlayNoCount = Number(localStorage.PlayNoCount);
 		DevYesCount = Number(localStorage.DevYesCount);
@@ -74,6 +96,24 @@
 		RefreshPage();
 	};
 	
+	function CheckDate(type) {
+	dateString = date.getDate() + "/" + (date.getMonth()+1) + "/" + (date.getFullYear());
+	if (type == "play") {
+			if (localStorage.lastPlay == dateString) {
+				return "denied";
+			}	else {
+				localStorage.lastPlay = dateString;
+				return "approved";
+			}
+		} else if (type == "dev") {
+			if (localStorage.lastDev == dateString) {
+				return "denied";
+			}	else {
+				localStorage.lastDev = dateString;
+				return "approved";
+			}
+		}
+	};
 	
 </script>
 	
@@ -87,14 +127,16 @@
 	<button id="PlayYes" type="button">Yes</button>   <button id="PlayNo" type="button">No</button>
 	You have played the game <span id="PlayYesCount">ERROR</span> times, and failed to play the game <span id="PlayNoCount">ERROR</span> times.<br>
 	That works out to a rate of <span id="PlayRate">ERROR</span>%. Make of that what you will.<br>
-	<br>
+	Last Play Confirmation: <span id="LastPlay">ERROR</span><br>
+	<span id="PlayFail"></span><br>
 	<br>
 	<h3><i>Part 2</i>: Develop the Game</h3><br>
 	You must develop, update or improve the game in some minor way (at least) every day. Have you developed the ATLAS Project today? <br>
 	<button id="DevYes" type="button">Yes</button> <button id="DevNo" type="button">No</button>
 	You have worked on the game <span id="DevYesCount">ERROR</span> times, and failed to work on the game <span id="DevNoCount">ERROR</span> times.<br>
-	That works out to a rate of <span id="DevRate">ERROR</span>%. Make of that what you will.<br><br>
-	<br><br><br>
+	That works out to a rate of <span id="DevRate">ERROR</span>%. Make of that what you will.<br>
+	Last Dev Confirmation: <span id="LastDev">ERROR</span><br>
+	<span id="DevFail"></span><br>
 	<br><br><br>
 	<br><br><br>
 	<br><br><br>
