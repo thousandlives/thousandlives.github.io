@@ -5,10 +5,7 @@
 
 	
 	if (localStorage.PlayYesCount) {
-		localStorage.PlayYesCount = Number(localStorage.PlayYesCount);
-		localStorage.PlayNoCount = Number(localStorage.PlayNoCount);
-		localStorage.DevYesCount = Number(localStorage.DevYesCount);
-		localStorage.DevNoCount = Number(localStorage.DevNoCount);
+		null
 	} else {
 		localStorage.PlayYesCount = 0;
 		localStorage.PlayNoCount = 0;
@@ -18,7 +15,6 @@
 		localStorage.lastDev = "Never";
 	}
 	
-	var PlayYesCount = Number(localStorage.PlayYesCount);
 	var PlayNoCount = Number(localStorage.PlayNoCount);
 	var DevYesCount = Number(localStorage.DevYesCount);
 	var DevNoCount = Number(localStorage.DevNoCount);
@@ -30,7 +26,6 @@
 		$("#PlayYes").click(function(){
 			if (CheckDate("play") == "approved") {
 				localStorage.PlayYesCount++
-				PlayYesCount++				
 			} else {
 				$("#PlayFail").html("You've already recorded today's play session.")
 			}
@@ -39,7 +34,6 @@
 		$("#PlayNo").click(function(){
 			if (CheckDate("play") == "approved") {
 				localStorage.PlayNoCount++
-				PlayNoCount++				
 			} else {
 				$("#PlayFail").html("You've already recorded today's play session.")
 			}
@@ -48,7 +42,6 @@
 		$("#DevYes").click(function(){
 			if (CheckDate("dev") == "approved") {
 				localStorage.DevYesCount++
-				DevYesCount++				
 			} else {
 				$("#DevFail").html("You've already recorded today's development session.")
 			}
@@ -57,7 +50,6 @@
 		$("#DevNo").click(function(){
 			if (CheckDate("dev") == "approved") {
 				localStorage.DevNoCount++
-				DevNoCount++				
 			} else {
 				$("#DevFail").html("You've already recorded today's development session.")
 			}
@@ -68,15 +60,19 @@
 	});
 		
 	function RefreshPage() {
-  		PlayRate = Number(PlayYesCount/(PlayYesCount+PlayNoCount))*100;
-		DevRate = Number(DevYesCount/(DevYesCount+DevNoCount))*100;
+		pYes = Number(localStorage.PlayYesCount);
+		pNo = Number(localStorage.PlayNoCount);
+		dYes = Number(localStorage.DevYesCount);
+		dNo = Number(localStorage.DevNoCount);
+  		PlayRate = (pYes/(pYes+pNo)*100);
+		DevRate = (dYes/(dYes+dNo)*100);
 		
 		$("#PlayRate").html(PlayRate.toFixed());
 		$("#DevRate").html(DevRate.toFixed());
-		$("#PlayYesCount").html(PlayYesCount);
-		$("#PlayNoCount").html(PlayNoCount);
-		$("#DevYesCount").html(DevYesCount);
-		$("#DevNoCount").html(DevNoCount);
+		$("#PlayYesCount").html(localStorage.PlayYesCount);
+		$("#PlayNoCount").html(localStorage.PlayNoCount);
+		$("#DevYesCount").html(localStorage.DevYesCount);
+		$("#DevNoCount").html(localStorage.DevNoCount);
 		$("#LastModified").html(document.lastModified);
 		$("#LastDev").html(localStorage.lastDev);
 		$("#LastPlay").html(localStorage.lastPlay);
@@ -89,10 +85,6 @@
 		localStorage.DevNoCount = 0;
 		localStorage.lastPlay = "Never";
 		localStorage.lastDev = "Never";
-		PlayYesCount = Number(localStorage.PlayYesCount);
-		PlayNoCount = Number(localStorage.PlayNoCount);
-		DevYesCount = Number(localStorage.DevYesCount);
-		DevNoCount = Number(localStorage.DevNoCount);
 		RefreshPage();
 	};
 	
