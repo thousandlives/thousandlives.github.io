@@ -4,9 +4,8 @@
 <script>
 
 	
-	if (localStorage.PlayYesCount) {
-		null
-	} else {
+	if (localStorage.PlayYesCount) {null} 
+	else {
 		localStorage.PlayYesCount = 0;
 		localStorage.PlayNoCount = 0;
 		localStorage.DevYesCount = 0;
@@ -15,43 +14,26 @@
 		localStorage.lastDev = "Never";
 	}
 	
-	var PlayNoCount = Number(localStorage.PlayNoCount);
-	var DevYesCount = Number(localStorage.DevYesCount);
-	var DevNoCount = Number(localStorage.DevNoCount);
-  	var PlayRate = 0, DevRate = 0;
- 	var date = new Date();
-	var dateString = "";
+ 	var now = new Date();
 
 	$(document).ready(function(){
 		$("#PlayYes").click(function(){
-			if (CheckDate("play") == "approved") {
-				localStorage.PlayYesCount++
-			} else {
+			result = CheckDate("play");
+			if (result == "sameday") {
 				$("#PlayFail").html("You've already recorded today's play session.")
-			}
-			RefreshPage();
-		});
-		$("#PlayNo").click(function(){
-			if (CheckDate("play") == "approved") {
-				localStorage.PlayNoCount++
 			} else {
-				$("#PlayFail").html("You've already recorded today's play session.")
+				localStorage.PlayYesCount++;
+				localStorage.PlayNoCount = Number(localStorage.PlayNoCount+result);
 			}
 			RefreshPage();
 		});
 		$("#DevYes").click(function(){
-			if (CheckDate("dev") == "approved") {
+			result = CheckDate("dev");
+			if (result == "sameday") {
+				$("#DevFail").html("You've already recorded today's development session.")
+			} else {
 				localStorage.DevYesCount++
-			} else {
-				$("#DevFail").html("You've already recorded today's development session.")
-			}
-			RefreshPage();
-		});
-		$("#DevNo").click(function(){
-			if (CheckDate("dev") == "approved") {
-				localStorage.DevNoCount++
-			} else {
-				$("#DevFail").html("You've already recorded today's development session.")
+				localStorage.DevNoCount = Number(localStorage.DevNoCount+result);
 			}
 			RefreshPage();
 		});
@@ -73,7 +55,6 @@
 		$("#PlayNoCount").html(localStorage.PlayNoCount);
 		$("#DevYesCount").html(localStorage.DevYesCount);
 		$("#DevNoCount").html(localStorage.DevNoCount);
-		$("#LastModified").html(document.lastModified);
 		$("#LastDev").html(localStorage.lastDev);
 		$("#LastPlay").html(localStorage.lastPlay);
 	};
@@ -89,20 +70,37 @@
 	};
 	
 	function CheckDate(type) {
-	dateString = date.getDate() + "/" + (date.getMonth()+1) + "/" + (date.getFullYear());
-	if (type == "play") {
-			if (localStorage.lastPlay == dateString) {
-				return "denied";
-			}	else {
-				localStorage.lastPlay = dateString;
-				return "approved";
+		now = new Date();
+		today = new Date(now.getFullYear(),now.getMonth(),now.getDate())
+		if (type == "play") {
+			if (localStorage.lastPlay == today) {
+				return "sameday";
+				
+			} else if (localStorage.lastPlay == "Never") {
+				localStorage.lastPlay = today;
+				return 0;
+				
+			} else {
+				lastPlayed = new Date(localStorage.lastPlay);
+				dMissed = Math.floor((today.getTime() - lastPlayed.getTime()) / 86400000);
+				localStorage.lastPlay = today;
+				return dMissed;
+				
 			}
 		} else if (type == "dev") {
-			if (localStorage.lastDev == dateString) {
-				return "denied";
-			}	else {
-				localStorage.lastDev = dateString;
-				return "approved";
+			if (localStorage.lastDev == today) {
+				return "sameday";
+				
+			}	else if (localStorage.lastDev == "Never") {
+				localStorage.lastDev = today;
+				return 0;
+			
+			} else {
+				lastDev = new Date(localStorage.lastDev);
+				dMissed = Math.floor((today.getTime() - lastDev.getTime()) / 86400000);
+				localStorage.lastDev = today;
+				return dMissed;
+				
 			}
 		}
 	};
@@ -116,7 +114,7 @@
 	<br>
 	<h3><i>Part 1</i>: Play the Game</h3><br>
 	You must play one day's worth of ATLAS Project to succeed. Have you played the ATLAS Project today?<br>
-	<button id="PlayYes" type="button">Yes</button>   <button id="PlayNo" type="button">No</button>
+	<button id="PlayYes" type="button">Yes</button><br>
 	You have played the game <span id="PlayYesCount">ERROR</span> times, and failed to play the game <span id="PlayNoCount">ERROR</span> times.<br>
 	That works out to a rate of <span id="PlayRate">ERROR</span>%. Make of that what you will.<br>
 	Last Play Confirmation: <span id="LastPlay">ERROR</span><br>
@@ -124,7 +122,7 @@
 	<br>
 	<h3><i>Part 2</i>: Develop the Game</h3><br>
 	You must develop, update or improve the game in some minor way (at least) every day. Have you developed the ATLAS Project today? <br>
-	<button id="DevYes" type="button">Yes</button> <button id="DevNo" type="button">No</button>
+	<button id="DevYes" type="button">Yes</button><br>
 	You have worked on the game <span id="DevYesCount">ERROR</span> times, and failed to work on the game <span id="DevNoCount">ERROR</span> times.<br>
 	That works out to a rate of <span id="DevRate">ERROR</span>%. Make of that what you will.<br>
 	Last Dev Confirmation: <span id="LastDev">ERROR</span><br>
@@ -133,7 +131,6 @@
 	<br><br><br>
 	<br><br><br>
 	<button id="ResetAll" type="button">Reset All Progress</button><br>
-	Last Modified: <span id="LastModified">ERROR</span><br>
 	
 
 </body>
