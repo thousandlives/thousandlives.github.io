@@ -49,9 +49,7 @@
 		
 		$("#LastEx").html(lastExString);
 		
-		lastModified = new Date(document.lastModified);
-		lastModString = lastModified.getDate()+"/"+(lastModified.getMonth()+1)+"/"+lastModified.getFullYear()+"  "+lastModified.getHours()+":"+lastModified.getMinutes();
-		$("#LastModified").html(lastModString)
+		$("#LastModified").html(document.lastModified);
 	};
 
 	function ResetAllProgress() {
