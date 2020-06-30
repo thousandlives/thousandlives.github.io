@@ -82,7 +82,7 @@
 				
 			} else {
 				lastPlayed = new Date(localStorage.lastPlay);
-				dMissed = Math.floor((today.getTime() - lastPlayed.getTime()) / 86400000);
+				dMissed = Math.floor((today.getTime() - lastPlayed.getTime()) / 86400000)-1;
 				localStorage.lastPlay = today;
 				return dMissed;
 				
@@ -97,7 +97,7 @@
 			
 			} else {
 				lastDev = new Date(localStorage.lastDev);
-				dMissed = Math.floor((today.getTime() - lastDev.getTime()) / 86400000);
+				dMissed = Math.floor((today.getTime() - lastDev.getTime()) / 86400000)-1;
 				localStorage.lastDev = today;
 				return dMissed;
 				
