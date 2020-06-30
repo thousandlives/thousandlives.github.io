@@ -1,0 +1,122 @@
+<html>
+<title>The ATLAS Project</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+
+	
+	if (localStorage.ExYesCount) {null} 
+	else {
+		localStorage.ExYesCount = 0;
+		localStorage.ExNoCount = 0;
+		localStorage.lastEx = "Never";
+	}
+	
+	$(document).ready(function(){
+	
+		$("#ExYes").click(function(){
+			result = CheckDate("play");
+			if (result == "sameday") {
+				$("#ExFail").html("You've already recorded today's play session.")
+			} else {
+				localStorage.ExYesCount++;
+				localStorage.ExNoCount = Number(localStorage.ExNoCount+result);
+			}
+			RefreshPage();
+		});
+		
+		$("#ResetAll").click(ResetAllProgress);
+		
+		RefreshPage();
+		
+	});
+		
+	//
+	function RefreshPage() {
+		if (localStorage.lastEx == "Never") {
+			ExRate = 0;
+			lastExString = localStorage.lastEx;
+		} else {
+			eYes = Number(localStorage.ExYesCount);
+			eNo = Number(localStorage.ExNoCount);
+			ExRate = (eYes/(eYes+eNo)*100);
+			lastExed = new Date(localStorage.lastEx);
+			lastExString = lastExed.getDate() + "/" + (lastExed.getMonth()+1) + "/" + lastExed.getFullYear();
+		}
+		
+		$("#ExRate").html(ExRate.toFixed());
+		$("#ExYesCount").html(localStorage.ExYesCount);
+		$("#ExNoCount").html(localStorage.ExNoCount);
+		
+		$("#LastEx").html(lastExString);
+		
+		lastModified = new Date(document.lastModified);
+		lastModString = lastModified.getDate()+"/"+(lastModified.getMonth()+1)+"/"+lastModified.getFullYear()+"  "+lastModified.getHours()+":"+lastModified.getMinutes();
+		$("#LastModified").html(lastModString)
+	};
+
+	function ResetAllProgress() {
+		localStorage.ExYesCount = 0;
+		localStorage.ExNoCount = 0;
+		localStorage.lastEx = "Never";
+		RefreshPage();
+	};
+	
+	function CheckDate(type) {
+		now = new Date();
+		today = new Date(now.getFullYear(),now.getMonth(),now.getDate())
+		if (type == "play") {
+			if (localStorage.lastEx == today) {
+				return "sameday";
+				
+			} else if (localStorage.lastEx == "Never") {
+				localStorage.lastEx = today;
+				return 0;
+				
+			} else {
+				lastExed = new Date(localStorage.lastEx);
+				dMissed = Math.floor((today.getTime() - lastExed.getTime()) / 86400000)-1;
+				localStorage.lastEx = today;
+				return dMissed;
+				
+			}
+		} else if (type == "dev") {
+			if (localStorage.lastDev == today) {
+				return "sameday";
+				
+			}	else if (localStorage.lastDev == "Never") {
+				localStorage.lastDev = today;
+				return 0;
+			
+			} else {
+				lastDev = new Date(localStorage.lastDev);
+				dMissed = Math.floor((today.getTime() - lastDev.getTime()) / 86400000)-1;
+				localStorage.lastDev = today;
+				return dMissed;
+				
+			}
+		}
+	};
+	
+</script>
+	
+<body>
+	<br>
+	<h1><b>Strength</b></h1><br>
+	<br>
+	<br>
+	<h3><i>Part 1</i>: Exercise</h3><br>
+	You must exercise once a day to succeed. Have you exercised today?<br>
+	<button id="ExYes" type="button">Yes</button><br>
+	You have exercised <span id="ExYesCount">ERROR</span> times, and failed to exercise <span id="ExNoCount">ERROR</span> times.<br>
+	That works out to a rate of <span id="ExRate">ERROR</span>%. Make of that what you will.<br>
+	Last Exercise Confirmation: <span id="LastEx">ERROR</span><br>
+	<span id="ExFail"></span><br>
+	<br><br><br>
+	<br><br><br>
+	<button id="ResetAll" type="button">Reset All Progress</button><br>
+	<br><br><br>
+	Page last modified: <span id="LastModified">ERROR</span>
+	
+
+</body>
+</html>
