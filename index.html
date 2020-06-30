@@ -28,34 +28,34 @@
 	}
 
 	
-  $(document).ready(function(){
+	$(document).ready(function(){
 
-    $("div.AgiCountDiv").html(localStorage.AgiCount);
-    $("div.ConCountDiv").html(localStorage.ConCount);
-    $("div.WisCountDiv").html(localStorage.WisCount);
-    $("div.PieCountDiv").html(localStorage.PieCount);
-	  
-    $("#AgiButton").click(function(){
-      localStorage.AgiCount++
-      $("div.AgiCountDiv").html(localStorage.AgiCount);
-    });
-    $("#ConButton").click(function(){
-      localStorage.ConCount++
-      $("div.ConCountDiv").html(localStorage.ConCount);
-    });
-    $("#IntButton").click(function(){
-    });
-    $("#WisButton").click(function(){
-      localStorage.WisCount++
-      $("div.WisCountDiv").html(localStorage.WisCount);
-    });
-    $("#PieButton").click(function(){
-      localStorage.PieCount++
-      $("div.PieCountDiv").html(localStorage.PieCount);
-    });
-  });
-  
-  
+		$("div.AgiCountDiv").html(localStorage.AgiCount);
+		$("div.ConCountDiv").html(localStorage.ConCount);
+		$("div.WisCountDiv").html(localStorage.WisCount);
+		$("div.PieCountDiv").html(localStorage.PieCount);
+		$("#LastModified").html(document.lastModified);
+		
+		$("#AgiButton").click(function(){
+			localStorage.AgiCount++
+			$("div.AgiCountDiv").html(localStorage.AgiCount);
+		});
+		$("#ConButton").click(function(){
+			localStorage.ConCount++
+			$("div.ConCountDiv").html(localStorage.ConCount);
+		});
+		$("#WisButton").click(function(){
+			localStorage.WisCount++
+			$("div.WisCountDiv").html(localStorage.WisCount);
+		});
+		$("#PieButton").click(function(){
+			localStorage.PieCount++
+			$("div.PieCountDiv").html(localStorage.PieCount);
+		});
+	 
+	});
+
+
 </script>
 <body>
 Welcome to the <b>ATLAS Project</b><br><br>
