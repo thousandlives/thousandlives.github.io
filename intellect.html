@@ -14,8 +14,6 @@
 		localStorage.lastDev = "Never";
 	}
 	
- 	var now = new Date();
-
 	$(document).ready(function(){
 		$("#PlayYes").click(function(){
 			result = CheckDate("play");
@@ -55,8 +53,17 @@
 		$("#PlayNoCount").html(localStorage.PlayNoCount);
 		$("#DevYesCount").html(localStorage.DevYesCount);
 		$("#DevNoCount").html(localStorage.DevNoCount);
-		$("#LastDev").html(localStorage.lastDev);
-		$("#LastPlay").html(localStorage.lastPlay);
+		
+		lastPlayed = new Date(localStorage.lastPlay);
+		lastDev = new Date(localStorage.lastDev);
+		lastPlayString = lastPlayed.getDate() + "/" + (lastPlayed.getMonth()+1) + "/" + lastPlayed.getFullYear();
+		lastDevString = lastDev.getDate() + "/" + (lastDev.getMonth()+1) + "/" + lastDev.getFullYear();
+		$("#LastPlay").html(lastPlayString);
+		$("#LastDev").html(lastDevString);
+		
+		lastModified = new Date(document.lastModified);
+		lastModString = lastModified.getDate()+"/"+(lastModified.getMonth()+1)+"/"+lastModified.getFullYear()+"  "+lastModified.getHours()+":"+lastModified.getMinutes();
+		$("#LastModified").html(lastModString)
 	};
 
 	function ResetAllProgress() {
@@ -129,8 +136,9 @@
 	<span id="DevFail"></span><br>
 	<br><br><br>
 	<br><br><br>
-	<br><br><br>
 	<button id="ResetAll" type="button">Reset All Progress</button><br>
+	<br><br><br>
+	Page last modified: <span id="LastModified">ERROR</span>
 	
 
 </body>
