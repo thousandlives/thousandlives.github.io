@@ -1,0 +1,120 @@
+<html>
+<title>The ATLAS Project</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+
+	
+	if (localStorage.MedYesCount) {null} 
+	else {
+		localStorage.MedYesCount = 0;
+		localStorage.MedNoCount = 0;
+		localStorage.lastMed = "Never";
+	}
+	
+	$(document).ready(function(){
+	
+		$("#MedYes").click(function(){
+			result = CheckDate("play");
+			if (result == "sameday") {
+				$("#MedFail").html("You've already recorded today's meditation session.")
+			} else {
+				localStorage.MedYesCount++;
+				localStorage.MedNoCount = Number(localStorage.MedNoCount+result);
+			}
+			RefreshPage();
+		});
+		
+		$("#ResetAll").click(ResetAllProgress);
+		
+		RefreshPage();
+		
+	});
+		
+	//
+	function RefreshPage() {
+		if (localStorage.lastMed == "Never") {
+			MedRate = 0;
+			lastMedString = localStorage.lastMed;
+		} else {
+			eYes = Number(localStorage.MedYesCount);
+			eNo = Number(localStorage.MedNoCount);
+			MedRate = (eYes/(eYes+eNo)*100);
+			lastMeded = new Date(localStorage.lastMed);
+			lastMedString = lastMeded.getDate() + "/" + (lastMeded.getMonth()+1) + "/" + lastMeded.getFullYear();
+		}
+		
+		$("#MedRate").html(MedRate.toFixed());
+		$("#MedYesCount").html(localStorage.MedYesCount);
+		$("#MedNoCount").html(localStorage.MedNoCount);
+		
+		$("#LastMed").html(lastMedString);
+		
+		$("#LastModified").html(document.lastModified);
+	};
+
+	function ResetAllProgress() {
+		localStorage.MedYesCount = 0;
+		localStorage.MedNoCount = 0;
+		localStorage.lastMed = "Never";
+		RefreshPage();
+	};
+	
+	function CheckDate(type) {
+		now = new Date();
+		today = new Date(now.getFullYear(),now.getMonth(),now.getDate())
+		if (type == "play") {
+			if (localStorage.lastMed == today) {
+				return "sameday";
+				
+			} else if (localStorage.lastMed == "Never") {
+				localStorage.lastMed = today;
+				return 0;
+				
+			} else {
+				lastMeded = new Date(localStorage.lastMed);
+				dMissed = Math.floor((today.getTime() - lastMeded.getTime()) / 86400000)-1;
+				localStorage.lastMed = today;
+				return dMissed;
+				
+			}
+		} else if (type == "dev") {
+			if (localStorage.lastDev == today) {
+				return "sameday";
+				
+			}	else if (localStorage.lastDev == "Never") {
+				localStorage.lastDev = today;
+				return 0;
+			
+			} else {
+				lastDev = new Date(localStorage.lastDev);
+				dMissed = Math.floor((today.getTime() - lastDev.getTime()) / 86400000)-1;
+				localStorage.lastDev = today;
+				return dMissed;
+				
+			}
+		}
+	};
+	
+</script>
+	
+<body>
+	<br>
+	<h1><b>Wisdom</b></h1><br>
+	<br>
+	<br>
+	<h3><i>Part 1</i>: Meditation</h3><br>
+	You must meditate once a day to succeed. Have you meditated today?<br>
+	<button id="MedYes" type="button">Yes</button><br>
+	You have meditated <span id="MedYesCount">ERROR</span> times, and failed to meditate <span id="MedNoCount">ERROR</span> times.<br>
+	That works out to a rate of <span id="MedRate">ERROR</span>%. Make of that what you will.<br>
+	Last Meditation Confirmation: <span id="LastMed">ERROR</span><br>
+	<span id="MedFail"></span><br>
+	<br><br><br>
+	<br><br><br>
+	<button id="ResetAll" type="button">Reset All Progress</button><br>
+	<br><br><br>
+	Page last modified: <span id="LastModified">ERROR</span>
+	
+
+</body>
+</html>
