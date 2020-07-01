@@ -14,13 +14,7 @@
 	} else {
 		localStorage.ConCount = 0
 	}
-	
-	if (localStorage.WisCount) {
-		localStorage.WisCount = Number(localStorage.WisCount)
-	} else {
-		localStorage.WisCount = 0
-	}
-	
+		
 	if (localStorage.PieCount) {
 		localStorage.PieCount = Number(localStorage.PieCount)
 	} else {
@@ -32,7 +26,6 @@
 
 		$("div.AgiCountDiv").html(localStorage.AgiCount);
 		$("div.ConCountDiv").html(localStorage.ConCount);
-		$("div.WisCountDiv").html(localStorage.WisCount);
 		$("div.PieCountDiv").html(localStorage.PieCount);
 		$("#LastModified").html(document.lastModified);
 		
@@ -43,10 +36,6 @@
 		$("#ConButton").click(function(){
 			localStorage.ConCount++
 			$("div.ConCountDiv").html(localStorage.ConCount);
-		});
-		$("#WisButton").click(function(){
-			localStorage.WisCount++
-			$("div.WisCountDiv").html(localStorage.WisCount);
 		});
 		$("#PieButton").click(function(){
 			localStorage.PieCount++
@@ -64,7 +53,7 @@ Stats <br>
 <button id="AgiButton" type="button">Agility</button> <div class="AgiCountDiv"></div><br>
 <button id="ConButton" type="button">Constitution</button> <div class="ConCountDiv"></div><br>
 <a href="intellect.html"><button>Intellect</button></a><br><br>
-<button id="WisButton" type="button">Wisdom</button> <div class="WisCountDiv"></div><br>
+<a href="wisdom.html"><button>Wisdom</button></a><br><br>
 <button id="PieButton" type="button">Piety</button> <div class="PieCountDiv"></div><br>
 <br><br><br>
 <br><br><br>
