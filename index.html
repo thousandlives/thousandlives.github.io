@@ -2,12 +2,6 @@
 <title>The ATLAS Project</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-
-	if (localStorage.AgiCount) {
-		localStorage.AgiCount = Number(localStorage.AgiCount)
-	} else {
-		localStorage.AgiCount = 0
-	}
 	
 	if (localStorage.ConCount) {
 		localStorage.ConCount = Number(localStorage.ConCount)
@@ -24,15 +18,10 @@
 	
 	$(document).ready(function(){
 
-		$("div.AgiCountDiv").html(localStorage.AgiCount);
 		$("div.ConCountDiv").html(localStorage.ConCount);
 		$("div.PieCountDiv").html(localStorage.PieCount);
 		$("#LastModified").html(document.lastModified);
 		
-		$("#AgiButton").click(function(){
-			localStorage.AgiCount++
-			$("div.AgiCountDiv").html(localStorage.AgiCount);
-		});
 		$("#ConButton").click(function(){
 			localStorage.ConCount++
 			$("div.ConCountDiv").html(localStorage.ConCount);
@@ -50,7 +39,7 @@
 Welcome to the <b>ATLAS Project</b><br><br>
 Stats <br>
 <a href="strength.html"><button>Strength</button></a><br><br>
-<button id="AgiButton" type="button">Agility</button> <div class="AgiCountDiv"></div><br>
+<a href="agility.html"><button>Agility</button></a><br><br>
 <button id="ConButton" type="button">Constitution</button> <div class="ConCountDiv"></div><br>
 <a href="intellect.html"><button>Intellect</button></a><br><br>
 <a href="wisdom.html"><button>Wisdom</button></a><br><br>
