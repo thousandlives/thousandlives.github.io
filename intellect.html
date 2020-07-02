@@ -21,7 +21,7 @@
 				$("#PlayFail").html("You've already recorded today's play session.")
 			} else {
 				localStorage.PlayYesCount++;
-				localStorage.PlayNoCount = Number(localStorage.PlayNoCount+result);
+				localStorage.PlayNoCount = Number(localStorage.PlayNoCount)+result;
 			}
 			RefreshPage();
 		});
@@ -31,7 +31,7 @@
 				$("#DevFail").html("You've already recorded today's development session.")
 			} else {
 				localStorage.DevYesCount++
-				localStorage.DevNoCount = Number(localStorage.DevNoCount+result);
+				localStorage.DevNoCount = Number(localStorage.DevNoCount)+result;
 			}
 			RefreshPage();
 		});
