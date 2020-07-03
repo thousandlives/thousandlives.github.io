@@ -3,11 +3,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	
-	if (localStorage.ConCount) {
-		localStorage.ConCount = Number(localStorage.ConCount)
-	} else {
-		localStorage.ConCount = 0
-	}
 		
 	if (localStorage.PieCount) {
 		localStorage.PieCount = Number(localStorage.PieCount)
@@ -18,14 +13,9 @@
 	
 	$(document).ready(function(){
 
-		$("div.ConCountDiv").html(localStorage.ConCount);
 		$("div.PieCountDiv").html(localStorage.PieCount);
 		$("#LastModified").html(document.lastModified);
 		
-		$("#ConButton").click(function(){
-			localStorage.ConCount++
-			$("div.ConCountDiv").html(localStorage.ConCount);
-		});
 		$("#PieButton").click(function(){
 			localStorage.PieCount++
 			$("div.PieCountDiv").html(localStorage.PieCount);
@@ -36,17 +26,17 @@
 
 </script>
 <body>
-Welcome to the <b>ATLAS Project</b><br><br>
-Stats <br>
-<a href="strength.html"><button>Strength</button></a><br><br>
-<a href="agility.html"><button>Agility</button></a><br><br>
-<button id="ConButton" type="button">Constitution</button> <div class="ConCountDiv"></div><br>
-<a href="intellect.html"><button>Intellect</button></a><br><br>
-<a href="wisdom.html"><button>Wisdom</button></a><br><br>
-<button id="PieButton" type="button">Piety</button> <div class="PieCountDiv"></div><br>
-<br><br><br>
-<br><br><br>
-<br><br><br>
-Page last modified: <span id="LastModified">ERROR</span> 
+	Welcome to the <b>ATLAS Project</b><br><br>
+	Stats <br>
+	<a href="strength.html"><button>Strength</button></a><br><br>
+	<a href="agility.html"><button>Agility</button></a><br><br>
+	<a href="endurance.html"><button>Endurance</button></a><br><br>
+	<a href="intellect.html"><button>Intellect</button></a><br><br>
+	<a href="wisdom.html"><button>Wisdom</button></a><br><br>
+	<button id="PieButton" type="button">Piety</button> <div class="PieCountDiv"></div><br>
+	<br><br><br>
+	<br><br><br>
+	<br><br><br>
+	Page last modified: <span id="LastModified">ERROR</span> 
 </body>
 </html>
