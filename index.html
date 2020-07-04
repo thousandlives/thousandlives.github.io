@@ -3,24 +3,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	
-		
-	if (localStorage.PieCount) {
-		localStorage.PieCount = Number(localStorage.PieCount)
-	} else {
-		localStorage.PieCount = 0
-	}
-
-	
 	$(document).ready(function(){
 
-		$("div.PieCountDiv").html(localStorage.PieCount);
 		$("#LastModified").html(document.lastModified);
-		
-		$("#PieButton").click(function(){
-			localStorage.PieCount++
-			$("div.PieCountDiv").html(localStorage.PieCount);
-		});
-	 
+			 
 	});
 
 
@@ -33,7 +19,7 @@
 	<a href="endurance.html"><button>Endurance</button></a><br><br>
 	<a href="intellect.html"><button>Intellect</button></a><br><br>
 	<a href="wisdom.html"><button>Wisdom</button></a><br><br>
-	<button id="PieButton" type="button">Piety</button> <div class="PieCountDiv"></div><br>
+	<a href="piety.html"><button>Piety</button></a><br><br>
 	<br><br><br>
 	<br><br><br>
 	<br><br><br>
