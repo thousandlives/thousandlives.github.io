@@ -14,7 +14,7 @@
 	$(document).ready(function(){
 	
 		$("#WorkYes").click(function(){
-			result = CheckDate("play");
+			result = CheckDate("work");
 			if (result == "sameday") {
 				$("#WorkFail").html("You've already recorded today's meditation session.")
 			} else {
@@ -62,7 +62,7 @@
 	function CheckDate(type) {
 		now = new Date();
 		today = new Date(now.getFullYear(),now.getMonth(),now.getDate())
-		if (type == "play") {
+		if (type == "work") {
 			if (localStorage.lastWork == today) {
 				return "sameday";
 				
@@ -74,21 +74,6 @@
 				lastWorked = new Date(localStorage.lastWork);
 				dMissed = Math.floor((today.getTime() - lastWorked.getTime()) / 86400000)-1;
 				localStorage.lastWork = today;
-				return dMissed;
-				
-			}
-		} else if (type == "dev") {
-			if (localStorage.lastDev == today) {
-				return "sameday";
-				
-			}	else if (localStorage.lastDev == "Never") {
-				localStorage.lastDev = today;
-				return 0;
-			
-			} else {
-				lastDev = new Date(localStorage.lastDev);
-				dMissed = Math.floor((today.getTime() - lastDev.getTime()) / 86400000)-1;
-				localStorage.lastDev = today;
 				return dMissed;
 				
 			}
