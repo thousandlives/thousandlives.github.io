@@ -1,0 +1,105 @@
+<html>
+<title>The ATLAS Project</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+
+	
+	if (localStorage.ChoreYesCount) {null} 
+	else {
+		localStorage.ChoreYesCount = 0;
+		localStorage.ChoreNoCount = 0;
+		localStorage.lastChore = "Never";
+	}
+	
+	$(document).ready(function(){
+	
+		$("#ChoreYes").click(function(){
+			result = CheckDate("chores");
+			if (result == "sameday") {
+				$("#ChoreFail").html("You've already recorded today's chore session.")
+			} else {
+				localStorage.ChoreYesCount++;
+				localStorage.ChoreNoCount = Number(localStorage.ChoreNoCount+result);
+			}
+			RefreshPage();
+		});
+		
+		$("#ResetAll").click(ResetAllProgress);
+		
+		RefreshPage();
+		
+	});
+		
+	//
+	function RefreshPage() {
+		if (localStorage.lastChore == "Never") {
+			ChoreRate = 0;
+			lastChoreString = localStorage.lastChore;
+		} else {
+			cYes = Number(localStorage.ChoreYesCount);
+			cNo = Number(localStorage.ChoreNoCount);
+			ChoreRate = (cYes/(cYes+cNo)*100);
+			lastChore = new Date(localStorage.lastChore);
+			lastChoreString = lastChore.getDate() + "/" + (lastChore.getMonth()+1) + "/" + lastChore.getFullYear();
+		}
+		
+		$("#ChoreRate").html(ChoreRate.toFixed());
+		$("#ChoreYesCount").html(localStorage.ChoreYesCount);
+		$("#ChoreNoCount").html(localStorage.ChoreNoCount);
+		
+		$("#LastChore").html(lastChoreString);
+		
+		$("#LastModified").html(document.lastModified);
+	};
+
+	function ResetAllProgress() {
+		localStorage.ChoreYesCount = 0;
+		localStorage.ChoreNoCount = 0;
+		localStorage.lastChore = "Never";
+		RefreshPage();
+	};
+	
+	function CheckDate(type) {
+		now = new Date();
+		today = new Date(now.getFullYear(),now.getMonth(),now.getDate())
+		if (type == "chores") {
+			if (localStorage.lastChore == today) {
+				return "sameday";
+				
+			} else if (localStorage.lastChore == "Never") {
+				localStorage.lastChore = today;
+				return 0;
+				
+			} else {
+				lastChoreed = new Date(localStorage.lastChore);
+				dMissed = Math.floor((today.getTime() - lastChoreed.getTime()) / 86400000)-1;
+				localStorage.lastChore = today;
+				return dMissed;
+				
+			}
+		}
+	};
+	
+</script>
+	
+<body>
+	<br>
+	<h1><b>Piety</b></h1><br>
+	<br>
+	<br>
+	<h3><i>Part 1</i>: Chore Progress</h3><br>
+	You must complete all relevant home responsibilities, once a day, to succeed. Have you done chores today?<br>
+	<button id="ChoreYes" type="button">Yes</button><br>
+	You have done chores <span id="ChoreYesCount">ERROR</span> times, and failed to do chores <span id="ChoreNoCount">ERROR</span> times.<br>
+	That works out to a rate of <span id="ChoreRate">ERROR</span>%. Make of that what you will.<br>
+	Last Chore Confirmation: <span id="LastChore">ERROR</span><br>
+	<span id="ChoreFail"></span><br>
+	<br><br><br>
+	<br><br><br>
+	<button id="ResetAll" type="button">Reset All Progress</button><br>
+	<br><br><br>
+	Page last modified: <span id="LastModified">ERROR</span>
+	
+
+</body>
+</html>
