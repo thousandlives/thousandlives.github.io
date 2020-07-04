@@ -14,7 +14,7 @@
 	$(document).ready(function(){
 	
 		$("#MedYes").click(function(){
-			result = CheckDate("play");
+			result = CheckDate("meditate");
 			if (result == "sameday") {
 				$("#MedFail").html("You've already recorded today's meditation session.")
 			} else {
@@ -62,7 +62,7 @@
 	function CheckDate(type) {
 		now = new Date();
 		today = new Date(now.getFullYear(),now.getMonth(),now.getDate())
-		if (type == "play") {
+		if (type == "meditate") {
 			if (localStorage.lastMed == today) {
 				return "sameday";
 				
