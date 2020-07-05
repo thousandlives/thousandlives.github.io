@@ -1,3 +1,3 @@
-function myFunction() {
-	null;
+function testFunction() {
+	alert("Hi There!");
 }
