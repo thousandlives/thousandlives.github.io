@@ -1,10 +1,20 @@
-var Question_Binary = {
-	verb: "dither",
-	past: "dithered",
-	totalYes: 0,
-	totalNo: 0,
-	rate: 0,
-	lastYes: "Never"
+function Question_Binary(verb,past) {
+	if (verb) {
+		this.verb = verb;
+	} else {
+		this.verb = "dither"
+	}
+	if (past) {
+		this.past = past;
+	} else {
+		this.past = "dithered"
+	}
+	this.totalYes = 0;
+	this.totalNo = 0;
+	this.rate = function() {
+		return (this.totalYes / (this.totalYes+this.totalNo)).toFixed(2)
+	};
+	this.lastYes = "Never";
 }
 
 function checkDate(dateString) {
