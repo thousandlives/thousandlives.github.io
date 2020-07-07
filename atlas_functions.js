@@ -1,14 +1,6 @@
 function Question_Binary(verb,past) {
-	if (verb) {
-		this.verb = verb;
-	} else {
-		this.verb = "dither"
-	}
-	if (past) {
-		this.past = past;
-	} else {
-		this.past = "dithered"
-	}
+	this.verb = verb;
+	this.past = past;
 	this.totalYes = 0;
 	this.totalNo = 0;
 	this.rate = function() {
