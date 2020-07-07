@@ -1,26 +1,33 @@
 <html>
 <title>The ATLAS Project</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="atlas_functions.js"></script>
+<script src="https://thousandlives.github.io/atlas_functions.js"></script>
 <script>
 
-	
-	if (localStorage.ExYesCount) {null} 
+	if (localStorage.BinaryExercise) {null} 
 	else {
-		localStorage.ExYesCount = 0;
-		localStorage.ExNoCount = 0;
-		localStorage.lastEx = "Never";
+		localStorage.BinaryExercise = new Question_Binary("exercise","exercised");
 	}
 	
 	$(document).ready(function(){
 	
 		$("#ExYes").click(function(){
-			result = CheckDate("play");
-			if (result == "sameday") {
-				$("#ExFail").html("You've already recorded today's play session.")
+			console.log("Yes clicked");
+			now = new Date();
+			today = new Date(now.getFullYear(),now.getMonth(),now.getDate());
+				
+			if (localStorage.BinaryExercise.lastYes == "Never") {
+				console.log("No past Exercise detected, creating new object")
+				localStorage.BinaryExercise.lastYes = today.toString();
+				localStorage.BinaryExercise.totalYes++;
 			} else {
-				localStorage.ExYesCount++;
-				localStorage.ExNoCount = Number(localStorage.ExNoCount+result);
+				var dayGap = checkDate(today.toString());
+				console.log("Past Exercise detected with a day gap of "+dayGap);
+				if (dayGap > 0) {
+					localStorage.BinaryExercise.totalYes ++;
+					localStorage.BinaryExercise.totalNo += dayGap - 1;
+					localStorage.BinaryExercise.lastYes = today.toString();
+				}
 			}
 			RefreshPage();
 		});
@@ -33,68 +40,26 @@
 		
 	//
 	function RefreshPage() {
-		if (localStorage.lastEx == "Never") {
-			ExRate = 0;
-			lastExString = localStorage.lastEx;
-		} else {
-			eYes = Number(localStorage.ExYesCount);
-			eNo = Number(localStorage.ExNoCount);
-			ExRate = (eYes/(eYes+eNo)*100);
-			lastExed = new Date(localStorage.lastEx);
-			lastExString = lastExed.getDate() + "/" + (lastExed.getMonth()+1) + "/" + lastExed.getFullYear();
-		}
+		$("#ExRate").html(localStorage.BinaryExercise.rate);
+		$("#ExYesCount").html(localStorage.BinaryExercise.totalYes);
+		$("#ExNoCount").html(localStorage.BinaryExercise.totalNo);
 		
-		$("#ExRate").html(ExRate.toFixed());
-		$("#ExYesCount").html(localStorage.ExYesCount);
-		$("#ExNoCount").html(localStorage.ExNoCount);
-		
-		$("#LastEx").html(lastExString);
+		$("#LastEx").html(localStorage.BinaryExercise.lastYes);
 		
 		$("#LastModified").html(document.lastModified);
+		
+		console.log("The page has been refreshed.");
 	};
 
 	function ResetAllProgress() {
-		localStorage.ExYesCount = 0;
-		localStorage.ExNoCount = 0;
-		localStorage.lastEx = "Never";
+		console.log("Reset clicked");
+		localStorage.BinaryExercise = new Question_Binary("exercise","exercised");
 		RefreshPage();
+		binary = localStorage.BinaryExercise
+		console.log(binary.verb);
 	};
 	
-	function CheckDate(type) {
-		now = new Date();
-		today = new Date(now.getFullYear(),now.getMonth(),now.getDate())
-		if (type == "play") {
-			if (localStorage.lastEx == today) {
-				return "sameday";
-				
-			} else if (localStorage.lastEx == "Never") {
-				localStorage.lastEx = today;
-				return 0;
-				
-			} else {
-				lastExed = new Date(localStorage.lastEx);
-				dMissed = Math.floor((today.getTime() - lastExed.getTime()) / 86400000)-1;
-				localStorage.lastEx = today;
-				return dMissed;
-				
-			}
-		} else if (type == "dev") {
-			if (localStorage.lastDev == today) {
-				return "sameday";
-				
-			}	else if (localStorage.lastDev == "Never") {
-				localStorage.lastDev = today;
-				return 0;
-			
-			} else {
-				lastDev = new Date(localStorage.lastDev);
-				dMissed = Math.floor((today.getTime() - lastDev.getTime()) / 86400000)-1;
-				localStorage.lastDev = today;
-				return dMissed;
-				
-			}
-		}
-	};
+
 	
 </script>
 	
