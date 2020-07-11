@@ -40,3 +40,8 @@ function checkDate(dateString) {
 	dayGap = (today.getTime() - date.getTime()) / 86400000;
 	return dayGap;
 };
+
+function loadActivity(quest_string) {
+	dummy = JSON.parse(quest_string);
+	questBinEx = new Quest_Binary(dummy.verb,dummy.past,dummy.activityLog,dummy.totalYes,dummy.totalNo,dummy.lastYes);
+};
