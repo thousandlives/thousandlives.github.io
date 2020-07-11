@@ -1,27 +1,28 @@
 <html>
 <title>The ATLAS Project</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="atlas_functions.js"></script>
+<script src="https://thousandlives.github.io/atlas_functions.js"></script>
 <script>
 
+	var questBinWork = "";
+	var verb = "de-backlog";
+	var past = "de-backlogged";
 	
-	if (localStorage.WorkYesCount) {null} 
+	if (localStorage.questBinWork) {
+		console.log("Save data detected. Loading...")
+		questBinWork = loadActivity(localStorage.questBinWork);
+	} 
 	else {
-		localStorage.WorkYesCount = 0;
-		localStorage.WorkNoCount = 0;
-		localStorage.lastWork = "Never";
+		console.log("No save data detected. Creating new file...")
+		questBinWork = new Quest_Binary(verb,past,[],0,0,"Never");
 	}
 	
 	$(document).ready(function(){
 	
 		$("#WorkYes").click(function(){
-			result = CheckDate("work");
-			if (result == "sameday") {
-				$("#WorkFail").html("You've already recorded today's meditation session.")
-			} else {
-				localStorage.WorkYesCount++;
-				localStorage.WorkNoCount = Number(localStorage.WorkNoCount+result);
-			}
+			console.log("Yes clicked");
+			questBinWork.addEntry();
+			localStorage.questBinWork = JSON.stringify(questBinWork);
 			RefreshPage();
 		});
 		
@@ -33,54 +34,25 @@
 		
 	//
 	function RefreshPage() {
-		if (localStorage.lastWork == "Never") {
-			WorkRate = 0;
-			lastWorkString = localStorage.lastWork;
-		} else {
-			eYes = Number(localStorage.WorkYesCount);
-			eNo = Number(localStorage.WorkNoCount);
-			WorkRate = (eYes/(eYes+eNo)*100);
-			lastWorked = new Date(localStorage.lastWork);
-			lastWorkString = lastWorked.getDate() + "/" + (lastWorked.getMonth()+1) + "/" + lastWorked.getFullYear();
-		}
-		
-		$("#WorkRate").html(WorkRate.toFixed());
-		$("#WorkYesCount").html(localStorage.WorkYesCount);
-		$("#WorkNoCount").html(localStorage.WorkNoCount);
-		
-		$("#LastWork").html(lastWorkString);
-		
+		$("#WorkRate").html(questBinWork.finalRate);
+		$("#WorkYesCount").html(questBinWork.totalYes);
+		$("#WorkNoCount").html(questBinWork.totalNo);
+		$("#LastWork").html(questBinWork.lastYes);
 		$("#LastModified").html(document.lastModified);
+		
+		$(".verb").html(verb);
+		$(".verb_title").html(verb);
+		$(".past").html(past);
+		console.log("The page has been refreshed.");
 	};
 
 	function ResetAllProgress() {
-		localStorage.WorkYesCount = 0;
-		localStorage.WorkNoCount = 0;
-		localStorage.lastWork = "Never";
+		console.log("Reset clicked");
+		localStorage.clear();
+		questBinWork = new Quest_Binary(verb,past,[],0,0,"Never");
 		RefreshPage();
 	};
-	
-	function CheckDate(type) {
-		now = new Date();
-		today = new Date(now.getFullYear(),now.getMonth(),now.getDate())
-		if (type == "work") {
-			if (localStorage.lastWork == today) {
-				return "sameday";
-				
-			} else if (localStorage.lastWork == "Never") {
-				localStorage.lastWork = today;
-				return 0;
-				
-			} else {
-				lastWorked = new Date(localStorage.lastWork);
-				dMissed = Math.floor((today.getTime() - lastWorked.getTime()) / 86400000)-1;
-				localStorage.lastWork = today;
-				return dMissed;
-				
-			}
-		}
-	};
-	
+		
 </script>
 	
 <body>
@@ -88,13 +60,12 @@
 	<h1><b>Endurance</b></h1><br>
 	<br>
 	<br>
-	<h3><i>Part 1</i>: Work Progress</h3><br>
-	You must make significant progress towards a zero-item TODO list, once a day, to succeed. Have you worked today?<br>
+	<h3><i>Part 1</i>: <span class="verb_title"></span></h3><br>
+	You must <span class="verb"></span> once a day to succeed. Have you <span class="past"></span> today?<br>
 	<button id="WorkYes" type="button">Yes</button><br>
-	You have worked <span id="WorkYesCount">ERROR</span> times, and failed to work <span id="WorkNoCount">ERROR</span> times.<br>
+	You have <span class="past"></span> <span id="WorkYesCount">ERROR</span> times, and failed to <span class="verb"></span> <span id="WorkNoCount">ERROR</span> times.<br>
 	That works out to a rate of <span id="WorkRate">ERROR</span>%. Make of that what you will.<br>
-	Last Work Confirmation: <span id="LastWork">ERROR</span><br>
-	<span id="WorkFail"></span><br>
+	Last <span class="verb_title"></span> Confirmation: <span id="LastWork">ERROR</span><br>
 	<br><br><br>
 	<br><br><br>
 	<button id="ResetAll" type="button">Reset All Progress</button><br>
