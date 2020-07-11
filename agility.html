@@ -1,27 +1,28 @@
 <html>
 <title>The ATLAS Project</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="atlas_functions.js"></script>
+<script src="https://thousandlives.github.io/atlas_functions.js"></script>
 <script>
 
+	var questBinScale = "";
+	var verb = "weigh yourself";
+	var past = "weighed yourself";
 	
-	if (localStorage.ScaleYesCount) {null} 
+	if (localStorage.questBinScale) {
+		console.log("Save data detected. Loading...")
+		questBinScale = loadActivity(localStorage.questBinScale);
+	} 
 	else {
-		localStorage.ScaleYesCount = 0;
-		localStorage.ScaleNoCount = 0;
-		localStorage.lastScale = "Never";
+		console.log("No save data detected. Creating new file...")
+		questBinScale = new Quest_Binary(verb,past,[],0,0,"Never");
 	}
 	
 	$(document).ready(function(){
 	
 		$("#ScaleYes").click(function(){
-			result = CheckDate("scale");
-			if (result == "sameday") {
-				$("#ScaleFail").html("You've already recorded today's play session.")
-			} else {
-				localStorage.ScaleYesCount++;
-				localStorage.ScaleNoCount = Number(localStorage.ScaleNoCount+result);
-			}
+			console.log("Yes clicked");
+			questBinScale.addEntry();
+			localStorage.questBinScale = JSON.stringify(questBinScale);
 			RefreshPage();
 		});
 		
@@ -33,56 +34,25 @@
 		
 	//
 	function RefreshPage() {
-		if (localStorage.lastScale == "Never") {
-			ScaleRate = 0;
-			lastScaleString = localStorage.lastScale;
-		} else {
-			eYes = Number(localStorage.ScaleYesCount);
-			eNo = Number(localStorage.ScaleNoCount);
-			ScaleRate = (eYes/(eYes+eNo)*100);
-			lastScaleed = new Date(localStorage.lastScale);
-			lastScaleString = lastScaleed.getDate() + "/" + (lastScaleed.getMonth()+1) + "/" + lastScaleed.getFullYear();
-		}
-		
-		$("#ScaleRate").html(ScaleRate.toFixed());
-		$("#ScaleYesCount").html(localStorage.ScaleYesCount);
-		$("#ScaleNoCount").html(localStorage.ScaleNoCount);
-		
-		$("#LastScale").html(lastScaleString);
-		
+		$("#ScaleRate").html(questBinScale.finalRate);
+		$("#ScaleYesCount").html(questBinScale.totalYes);
+		$("#ScaleNoCount").html(questBinScale.totalNo);
+		$("#LastScale").html(questBinScale.lastYes);
 		$("#LastModified").html(document.lastModified);
+		
+		$(".verb").html(verb);
+		$(".verb_title").html(verb);
+		$(".past").html(past);
+		console.log("The page has been refreshed.");
 	};
 
 	function ResetAllProgress() {
-		localStorage.ScaleYesCount = 0;
-		localStorage.ScaleNoCount = 0;
-		localStorage.lastScale = "Never";
+		console.log("Reset clicked");
+		localStorage.clear();
+		questBinScale = new Quest_Binary(verb,past,[],0,0,"Never");
 		RefreshPage();
 	};
-	
-	function CheckDate(type) {
-	
-		now = new Date();
-		today = new Date(now.getFullYear(),now.getMonth(),now.getDate())
-		if (type == "scale") {
-			if (localStorage.lastScale == today) {
-				return "sameday";
-				
-			} else if (localStorage.lastScale == "Never") {
-				localStorage.lastScale = today;
-				return 0;
-				
-			} else {
-				lastScaleed = new Date(localStorage.lastScale);
-				dMissed = Math.floor((today.getTime() - lastScaleed.getTime()) / 86400000)-1;
-				localStorage.lastScale = today;
-				return dMissed;
-				
-			}
-		}
 		
-	};
-	
 </script>
 	
 <body>
@@ -90,13 +60,12 @@
 	<h1><b>Agility</b></h1><br>
 	<br>
 	<br>
-	<h3><i>Part 1</i>: Weigh Yourself</h3><br>
-	You must weigh yourself once a day to succeed. Have you weighed yourself today?<br>
+	<h3><i>Part 1</i>: <span class="verb_title"></span></h3><br>
+	You must <span class="verb"></span> once a day to succeed. Have you <span class="past"></span> today?<br>
 	<button id="ScaleYes" type="button">Yes</button><br>
-	You have weighed yourself <span id="ScaleYesCount">ERROR</span> times, and failed to weigh yourself <span id="ScaleNoCount">ERROR</span> times.<br>
+	You have <span class="past"></span> <span id="ScaleYesCount">ERROR</span> times, and failed to <span class="verb"></span> <span id="ScaleNoCount">ERROR</span> times.<br>
 	That works out to a rate of <span id="ScaleRate">ERROR</span>%. Make of that what you will.<br>
-	Last Weight Check Confirmation: <span id="LastScale">ERROR</span><br>
-	<span id="ScaleFail"></span><br>
+	Last <span class="verb_title"></span> Confirmation: <span id="LastScale">ERROR</span><br>
 	<br><br><br>
 	<br><br><br>
 	<button id="ResetAll" type="button">Reset All Progress</button><br>
