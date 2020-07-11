@@ -4,31 +4,22 @@
 <script src="https://thousandlives.github.io/atlas_functions.js"></script>
 <script>
 
-	if (localStorage.BinaryExercise) {null} 
+	var questBinEx = "";
+	if (localStorage.questBinEx) {
+		console.log("Save data detected. Loading...")
+		loadActivity(localStorage.questBinEx);
+	} 
 	else {
-		localStorage.BinaryExercise = new Question_Binary("exercise","exercised");
+		console.log("No save data detected. Creating new file...")
+		questBinEx = new Quest_Binary("exercise","exercised",[],0,0,"Never");
 	}
 	
 	$(document).ready(function(){
 	
 		$("#ExYes").click(function(){
 			console.log("Yes clicked");
-			now = new Date();
-			today = new Date(now.getFullYear(),now.getMonth(),now.getDate());
-				
-			if (localStorage.BinaryExercise.lastYes == "Never") {
-				console.log("No past Exercise detected, creating new object")
-				localStorage.BinaryExercise.lastYes = today.toString();
-				localStorage.BinaryExercise.totalYes++;
-			} else {
-				var dayGap = checkDate(today.toString());
-				console.log("Past Exercise detected with a day gap of "+dayGap);
-				if (dayGap > 0) {
-					localStorage.BinaryExercise.totalYes ++;
-					localStorage.BinaryExercise.totalNo += dayGap - 1;
-					localStorage.BinaryExercise.lastYes = today.toString();
-				}
-			}
+			questBinEx.addEntry();
+			localStorage.questBinEx = JSON.stringify(questBinEx);
 			RefreshPage();
 		});
 		
@@ -40,12 +31,10 @@
 		
 	//
 	function RefreshPage() {
-		$("#ExRate").html(localStorage.BinaryExercise.rate);
-		$("#ExYesCount").html(localStorage.BinaryExercise.totalYes);
-		$("#ExNoCount").html(localStorage.BinaryExercise.totalNo);
-		
-		$("#LastEx").html(localStorage.BinaryExercise.lastYes);
-		
+		$("#ExRate").html(questBinEx.finalRate);
+		$("#ExYesCount").html(questBinEx.totalYes);
+		$("#ExNoCount").html(questBinEx.totalNo);
+		$("#LastEx").html(questBinEx.lastYes);
 		$("#LastModified").html(document.lastModified);
 		
 		console.log("The page has been refreshed.");
@@ -53,14 +42,10 @@
 
 	function ResetAllProgress() {
 		console.log("Reset clicked");
-		localStorage.BinaryExercise = new Question_Binary("exercise","exercised");
+		localStorage.clear();
 		RefreshPage();
-		binary = localStorage.BinaryExercise
-		console.log(binary.verb);
 	};
-	
-
-	
+		
 </script>
 	
 <body>
