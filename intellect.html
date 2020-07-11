@@ -1,118 +1,58 @@
 <html>
 <title>The ATLAS Project</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="atlas_functions.js"></script>
+<script src="https://thousandlives.github.io/atlas_functions.js"></script>
 <script>
 
+	var questBinDev = "";
+	var verb = "develop the game";
+	var past = "developed the game";
 	
-	if (localStorage.PlayYesCount) {null} 
+	if (localStorage.questBinDev) {
+		console.log("Save data detected. Loading...")
+		questBinDev = loadActivity(localStorage.questBinDev);
+	} 
 	else {
-		localStorage.PlayYesCount = 0;
-		localStorage.PlayNoCount = 0;
-		localStorage.DevYesCount = 0;
-		localStorage.DevNoCount = 0;
-		localStorage.lastPlay = "Never";
-		localStorage.lastDev = "Never";
+		console.log("No save data detected. Creating new file...")
+		questBinDev = new Quest_Binary(verb,past,[],0,0,"Never");
 	}
 	
 	$(document).ready(function(){
-		$("#PlayYes").click(function(){
-			result = CheckDate("play");
-			if (result == "sameday") {
-				$("#PlayFail").html("You've already recorded today's play session.")
-			} else {
-				localStorage.PlayYesCount++;
-				localStorage.PlayNoCount = Number(localStorage.PlayNoCount)+result;
-			}
-			RefreshPage();
-		});
+	
 		$("#DevYes").click(function(){
-			result = CheckDate("dev");
-			if (result == "sameday") {
-				$("#DevFail").html("You've already recorded today's development session.")
-			} else {
-				localStorage.DevYesCount++
-				localStorage.DevNoCount = Number(localStorage.DevNoCount)+result;
-			}
+			console.log("Yes clicked");
+			questBinDev.addEntry();
+			localStorage.questBinDev = JSON.stringify(questBinDev);
 			RefreshPage();
 		});
+		
 		$("#ResetAll").click(ResetAllProgress);
+		
 		RefreshPage();
+		
 	});
 		
+	//
 	function RefreshPage() {
-		pYes = Number(localStorage.PlayYesCount);
-		pNo = Number(localStorage.PlayNoCount);
-		dYes = Number(localStorage.DevYesCount);
-		dNo = Number(localStorage.DevNoCount);
-  		PlayRate = (pYes/(pYes+pNo)*100);
-		DevRate = (dYes/(dYes+dNo)*100);
+		$("#DevRate").html(questBinDev.finalRate);
+		$("#DevYesCount").html(questBinDev.totalYes);
+		$("#DevNoCount").html(questBinDev.totalNo);
+		$("#LastDev").html(questBinDev.lastYes);
+		$("#LastModified").html(document.lastModified);
 		
-		$("#PlayRate").html(PlayRate.toFixed());
-		$("#DevRate").html(DevRate.toFixed());
-		$("#PlayYesCount").html(localStorage.PlayYesCount);
-		$("#PlayNoCount").html(localStorage.PlayNoCount);
-		$("#DevYesCount").html(localStorage.DevYesCount);
-		$("#DevNoCount").html(localStorage.DevNoCount);
-		
-		lastPlayed = new Date(localStorage.lastPlay);
-		lastDev = new Date(localStorage.lastDev);
-		lastPlayString = lastPlayed.getDate() + "/" + (lastPlayed.getMonth()+1) + "/" + lastPlayed.getFullYear();
-		lastDevString = lastDev.getDate() + "/" + (lastDev.getMonth()+1) + "/" + lastDev.getFullYear();
-		$("#LastPlay").html(lastPlayString);
-		$("#LastDev").html(lastDevString);
-		
-		lastModified = new Date(document.lastModified);
-		lastModString = lastModified.getDate()+"/"+(lastModified.getMonth()+1)+"/"+lastModified.getFullYear()+"  "+lastModified.getHours()+":"+lastModified.getMinutes();
-		$("#LastModified").html(lastModString)
+		$(".verb").html(verb);
+		$(".verb_title").html(verb);
+		$(".past").html(past);
+		console.log("The page has been refreshed.");
 	};
 
 	function ResetAllProgress() {
-		localStorage.PlayYesCount = 0;
-		localStorage.PlayNoCount = 0;
-		localStorage.DevYesCount = 0;
-		localStorage.DevNoCount = 0;
-		localStorage.lastPlay = "Never";
-		localStorage.lastDev = "Never";
+		console.log("Reset clicked");
+		localStorage.clear();
+		questBinDev = new Quest_Binary(verb,past,[],0,0,"Never");
 		RefreshPage();
 	};
-	
-	function CheckDate(type) {
-		now = new Date();
-		today = new Date(now.getFullYear(),now.getMonth(),now.getDate())
-		if (type == "play") {
-			if (localStorage.lastPlay == today) {
-				return "sameday";
-				
-			} else if (localStorage.lastPlay == "Never") {
-				localStorage.lastPlay = today;
-				return 0;
-				
-			} else {
-				lastPlayed = new Date(localStorage.lastPlay);
-				dMissed = Math.floor((today.getTime() - lastPlayed.getTime()) / 86400000)-1;
-				localStorage.lastPlay = today;
-				return dMissed;
-				
-			}
-		} else if (type == "dev") {
-			if (localStorage.lastDev == today) {
-				return "sameday";
-				
-			}	else if (localStorage.lastDev == "Never") {
-				localStorage.lastDev = today;
-				return 0;
-			
-			} else {
-				lastDev = new Date(localStorage.lastDev);
-				dMissed = Math.floor((today.getTime() - lastDev.getTime()) / 86400000)-1;
-				localStorage.lastDev = today;
-				return dMissed;
-				
-			}
-		}
-	};
-	
+		
 </script>
 	
 <body>
@@ -120,21 +60,12 @@
 	<h1><b>Intellect</b></h1><br>
 	<br>
 	<br>
-	<h3><i>Part 1</i>: Play the Game</h3><br>
-	You must play one day's worth of ATLAS Project to succeed. Have you played the ATLAS Project today?<br>
-	<button id="PlayYes" type="button">Yes</button><br>
-	You have played the game <span id="PlayYesCount">ERROR</span> times, and failed to play the game <span id="PlayNoCount">ERROR</span> times.<br>
-	That works out to a rate of <span id="PlayRate">ERROR</span>%. Make of that what you will.<br>
-	Last Play Confirmation: <span id="LastPlay">ERROR</span><br>
-	<span id="PlayFail"></span><br>
-	<br>
-	<h3><i>Part 2</i>: Develop the Game</h3><br>
-	You must develop, update or improve the game in some minor way (at least) every day. Have you developed the ATLAS Project today? <br>
+	<h3><i>Part 1</i>: <span class="verb_title"></span></h3><br>
+	You must <span class="verb"></span> once a day to succeed. Have you <span class="past"></span> today?<br>
 	<button id="DevYes" type="button">Yes</button><br>
-	You have worked on the game <span id="DevYesCount">ERROR</span> times, and failed to work on the game <span id="DevNoCount">ERROR</span> times.<br>
+	You have <span class="past"></span> <span id="DevYesCount">ERROR</span> times, and failed to <span class="verb"></span> <span id="DevNoCount">ERROR</span> times.<br>
 	That works out to a rate of <span id="DevRate">ERROR</span>%. Make of that what you will.<br>
-	Last Dev Confirmation: <span id="LastDev">ERROR</span><br>
-	<span id="DevFail"></span><br>
+	Last <span class="verb_title"></span> Confirmation: <span id="LastDev">ERROR</span><br>
 	<br><br><br>
 	<br><br><br>
 	<button id="ResetAll" type="button">Reset All Progress</button><br>
