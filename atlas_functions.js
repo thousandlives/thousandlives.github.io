@@ -43,5 +43,6 @@ function checkDate(dateString) {
 
 function loadActivity(quest_string) {
 	dummy = JSON.parse(quest_string);
-	questBinEx = new Quest_Binary(dummy.verb,dummy.past,dummy.activityLog,dummy.totalYes,dummy.totalNo,dummy.lastYes);
+	dummyQuest = new Quest_Binary(dummy.verb,dummy.past,dummy.activityLog,dummy.totalYes,dummy.totalNo,dummy.lastYes);
+	return dummyQuest;
 };
