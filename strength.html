@@ -4,22 +4,25 @@
 <script src="https://thousandlives.github.io/atlas_functions.js"></script>
 <script>
 
-	var questBinEx = "";
-	if (localStorage.questBinEx) {
+	var questBinExer = "";
+	var verb = "exercise";
+	var past = "exercised";
+	
+	if (localStorage.questBinExer) {
 		console.log("Save data detected. Loading...")
-		loadActivity(localStorage.questBinEx);
+		questBinExer = loadActivity(localStorage.questBinExer);
 	} 
 	else {
 		console.log("No save data detected. Creating new file...")
-		questBinEx = new Quest_Binary("exercise","exercised",[],0,0,"Never");
+		questBinExer = new Quest_Binary(verb,past,[],0,0,"Never");
 	}
 	
 	$(document).ready(function(){
 	
-		$("#ExYes").click(function(){
+		$("#ExerYes").click(function(){
 			console.log("Yes clicked");
-			questBinEx.addEntry();
-			localStorage.questBinEx = JSON.stringify(questBinEx);
+			questBinExer.addEntry();
+			localStorage.questBinExer = JSON.stringify(questBinExer);
 			RefreshPage();
 		});
 		
@@ -31,19 +34,22 @@
 		
 	//
 	function RefreshPage() {
-		$("#ExRate").html(questBinEx.finalRate);
-		$("#ExYesCount").html(questBinEx.totalYes);
-		$("#ExNoCount").html(questBinEx.totalNo);
-		$("#LastEx").html(questBinEx.lastYes);
+		$("#ExerRate").html(questBinExer.finalRate);
+		$("#ExerYesCount").html(questBinExer.totalYes);
+		$("#ExerNoCount").html(questBinExer.totalNo);
+		$("#LastExer").html(questBinExer.lastYes);
 		$("#LastModified").html(document.lastModified);
 		
+		$(".verb").html(verb);
+		$(".verb_title").html(verb);
+		$(".past").html(past);
 		console.log("The page has been refreshed.");
 	};
 
 	function ResetAllProgress() {
 		console.log("Reset clicked");
 		localStorage.clear();
-		questBinEx = new Quest_Binary("exercise","exercised",[],0,0,"Never");
+		questBinExer = new Quest_Binary(verb,past,[],0,0,"Never");
 		RefreshPage();
 	};
 		
@@ -54,13 +60,12 @@
 	<h1><b>Strength</b></h1><br>
 	<br>
 	<br>
-	<h3><i>Part 1</i>: Exercise</h3><br>
-	You must exercise once a day to succeed. Have you exercised today?<br>
-	<button id="ExYes" type="button">Yes</button><br>
-	You have exercised <span id="ExYesCount">ERROR</span> times, and failed to exercise <span id="ExNoCount">ERROR</span> times.<br>
-	That works out to a rate of <span id="ExRate">ERROR</span>%. Make of that what you will.<br>
-	Last Exercise Confirmation: <span id="LastEx">ERROR</span><br>
-	<span id="ExFail"></span><br>
+	<h3><i>Part 1</i>: <span class="verb_title"></span></h3><br>
+	You must <span class="verb"></span> once a day to succeed. Have you <span class="past"></span> today?<br>
+	<button id="ExerYes" type="button">Yes</button><br>
+	You have <span class="past"></span> <span id="ExerYesCount">ERROR</span> times, and failed to <span class="verb"></span> <span id="ExerNoCount">ERROR</span> times.<br>
+	That works out to a rate of <span id="ExerRate">ERROR</span>%. Make of that what you will.<br>
+	Last <span class="verb_title"></span> Confirmation: <span id="LastExer">ERROR</span><br>
 	<br><br><br>
 	<br><br><br>
 	<button id="ResetAll" type="button">Reset All Progress</button><br>
