@@ -4,6 +4,9 @@ function Quest_Binary(verb,past,log,yes,no,last) {
 	this.activityLog = log;							//array containing all 'yes' entries
 	this.totalYes = yes;							//total number of yesses recorded
 	this.totalNo = no;							//total number of nos recorded
+	this.lastYes = last;							//date of last 'yes' entry
+	
+	//function to add a new entry to the log
 	this.addEntry = function() {
 		var dayGap = checkDate(this.lastYes);
 		if (dayGap>0){
@@ -15,15 +18,16 @@ function Quest_Binary(verb,past,log,yes,no,last) {
 			this.activityLog.push(today);
 			this.lastYes = today;
 		};
-	};									//function to add a new entry to the log
+	};
+	
+	//function to calculate completion rate, returns float between 0 and 1
 	this.finalRate = function() {		
 		if ((this.totalYes+this.totalNo)>0) {
 			return (this.totalYes / (this.totalYes+this.totalNo)).toFixed(2);	
 		} else {
 			return 0;
 		}
-	};									//completion rate between 0 and 1
-	this.lastYes = last;							//date of last 'yes' entry
+	};
 };
 
 function checkDate(dateString) {
