@@ -1,12 +1,17 @@
-function Question_Binary(verb,past) {
+function Question_Binary(verb,past,log,yes,no,last) {
 	this.verb = verb;
 	this.past = past;
-	this.totalYes = 0;
-	this.totalNo = 0;
-	this.rate = function() {
-		return (this.totalYes / (this.totalYes+this.totalNo)).toFixed(2)
+	this.activityLog = log;
+	this.totalYes = yes;
+	this.totalNo = no;
+	this.finalRate = function() {
+		if ((this.totalYes+this.totalNo)>0) {
+			return (this.totalYes / (this.totalYes+this.totalNo)).toFixed(2);	
+		} else {
+			return 0;
+		}
 	};
-	this.lastYes = "Never";
+	this.lastYes = last;
 }
 
 function checkDate(dateString) {
